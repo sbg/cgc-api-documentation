@@ -1,0 +1,3079 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CGC Seven Bridges Datasets API",
+    "version": "v0",
+    "termsOfService": "http://www.cancergenomicscloud.org/terms",
+    "contact": {
+      "x-role": "responsible organization",
+      "name": "Seven Bridges",
+      "email": "cgc@sbgenomics.com"
+    },
+    "license": {
+        "name": "Apache 2.0",
+        "url" : "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://cgc-datasets-api.sbgenomics.com/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "NIHdatacommons"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiRoot"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Get all API paths",
+        "operationId": "GET_root",
+        "summary": "Get all API paths",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/datasets": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetsList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Get all datasets",
+        "operationId": "GET_datasets",
+        "summary": "Get all datasets",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/datasets/{dataset_key}/v0": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetRoot"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "List all entities in a specific dataset",
+        "operationId": "GET_datasets-dataset_key-v0",
+        "summary": "List all entities in a specific dataset",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/{entity_key}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "List entities in a dataset of a certain entity type",
+        "operationId": "GET_datasets-dataset_key-v0-entity_key",
+        "summary": "List entities in a dataset of a certain entity type",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/{entity_key}/{entity_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Describe an entity with given entity_id",
+        "operationId": "GET_datasets-dataset_key-v0-entity_key-entity_id",
+        "summary": "Describe an entity with given entity_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/{entity1_key}/{entity_id}/{entity2_key}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityListForSpecificEntity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Get a list of entities associated to an entity defined by entity_id",
+        "operationId": "GET_datasets-dataset_key-v0-entity1_key-entity_id-entity2_key",
+        "summary": "Get a list of entities associated to an entity defined by entity_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity1_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity2_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/{entity_key}/schema": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaForAnEntity"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Get schema description for an entity",
+        "operationId": "GET_datasets-dataset_key-v0-entity_key-schema",
+        "summary": "Get schema description for an entity",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "entity_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/query": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DslQueryResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Execute a custom dsl query on a dataset",
+        "operationId": "POST_datasets-dataset_key-v0-query",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DslQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "summary": "Execute a custom dsl query on a dataset",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/datasets/{dataset_key}/v0/query/total": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DslQueryTotalResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Get a number of results from the custom dsl query on a dataset",
+        "operationId": "POST_datasets-dataset_key-v0-query-total",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DslQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "summary": "Get a number of results from the custom dsl query on a dataset",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "dataset_key",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/search": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Search contents of datasets by term",
+        "operationId": "GET_search",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "required": true,
+            "description": "Term for search",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Search contents of datasets by term",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/describe": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "description": "Describe a uri returned by /search",
+        "operationId": "GET_describe",
+        "parameters": [
+          {
+            "name": "uri",
+            "in": "query",
+            "required": true,
+            "description": "Uri to be described",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Describe a uri returned by /search",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Href": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "href"
+        ]
+      },
+      "ApiRoot": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/"
+            },
+            "datasets": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets"
+            },
+            "search": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/search"
+            },
+            "describe": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/describe"
+            }
+          }
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "datasets": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "search": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "describe": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self",
+              "datasets",
+              "search",
+              "describe"
+            ]
+          }
+        },
+        "required": [
+          "_links"
+        ]
+      },
+      "DatasetsList": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/"
+            },
+            "tcga": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0",
+              "label": "TCGA Legacy"
+            },
+            "ccle": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/ccle/v0",
+              "label": "CCLE Legacy"
+            },
+            "tcga_grch38": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0",
+              "label": "TCGA GRCh38"
+            },
+            "target": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/target/v0",
+              "label": "TARGET GRCh38"
+            },
+            "cptac": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/cptac/v0",
+              "label": "CPTAC"
+            },
+            "tcia": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcia/v0",
+              "label": "TCIA"
+            },
+            "icgc": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/icgc/v0",
+              "label": "ICGC"
+            }
+          },
+          "description": "Datasets API Advance Access Program"
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_links",
+          "description"
+        ]
+      },
+      "SearchResponse": {
+        "example": {
+          "tcga": [
+            {
+              "uri": "https://www.sbgenomics.com/tcga/case/8BEEE000-ECAB-4A49-9C9D-BB8E677AE199",
+              "label": "Follicular Carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Case"
+            },
+            {
+              "uri": "https://www.sbgenomics.com/tcga/case/BA39BFBC-5CAC-4F6C-B55C-4EEE3466EE93",
+              "label": "Infiltrating ductal carcinoma with metaplastic carcinoma and focal apocrine features",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Case"
+            }
+          ],
+          "ccle": [
+            {
+              "uri": "https://www.sbgenomics.com/ccle/histology/02",
+              "label": "Carcinoma",
+              "type": "http://www.w3.org/2002/07/owl#NamedIndividual"
+            },
+            {
+              "uri": "https://www.sbgenomics.com/ccle/histology/02",
+              "label": "Carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Clinical"
+            }
+          ],
+          "tcga_grch38": [
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/diagnosis/d8f1c9e3-979f-5041-847c-3f2182427ec3",
+              "label": "Follicular Carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Diagnosis"
+            },
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/diagnosis/0d0a408b-9d40-5193-8ee6-a31c70746820",
+              "label": "NEUROENDOCRINE CARCINOMA",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Diagnosis"
+            }
+          ],
+          "target": [],
+          "cptac": [
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/disease_type/acc",
+              "label": "Adrenocortical Carcinoma",
+              "type": "http://www.w3.org/2002/07/owl#NamedIndividual"
+            },
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/disease_type/acc",
+              "label": "Adrenocortical Carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#DiseaseType"
+            }
+          ],
+          "tcia": [
+            {
+              "uri": "https://semantics.sbgenomics.com/imaging/diseasetype/esophageal_carcinoma",
+              "label": "Esophageal Carcinoma",
+              "type": "http://www.w3.org/2002/07/owl#NamedIndividual"
+            },
+            {
+              "uri": "https://semantics.sbgenomics.com/imaging/diseasetype/esophageal_carcinoma",
+              "label": "Esophageal Carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#DiseaseType"
+            }
+          ],
+          "icgc": [
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/specimen/SP107786",
+              "label": "Adenosquamous carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Specimen"
+            },
+            {
+              "uri": "https://semantics.sbgenomics.com/cancer/specimen/SP107788",
+              "label": "Adenosquamous carcinoma",
+              "type": "https://semantics.sbgenomics.com/ontology/sbg#Specimen"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "DescribeResponse": {
+        "example": {
+          "uri": "https://www.sbgenomics.com/tcga/case/8BEEE000-ECAB-4A49-9C9D-BB8E677AE199",
+          "tcga": {
+            "https://semantics.sbgenomics.com/ontology/sbg#hasCase": [
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b08c5d8691b339",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b351",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0298dd2c899b7",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b08c5d8691b44f",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa2f9",
+              "https://www.sbgenomics.com/tcga/file/56607d81e4b0b37b3d992c39",
+              "https://www.sbgenomics.com/tcga/file/56607d83e4b0ec1099f8ed73",
+              "https://www.sbgenomics.com/tcga/file/56607d85e4b0ca31916504ee",
+              "https://www.sbgenomics.com/tcga/file/56607d86e4b0ca31916504f2",
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b0298dd2c8987a",
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b0ef12181aa199",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0298dd2c89895",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0298dd2c898ae",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b342",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b395",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b093830b69767f",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a80",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a8c",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0ef12181aa23f",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0298dd2c89998",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b08c5d8691b465",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b093830b6976e9",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248ae5",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248b14",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa25d",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa278",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa28d",
+              "https://www.sbgenomics.com/tcga/file/564a3c02e4b08c5d8691b4ac",
+              "https://www.sbgenomics.com/tcga/file/56607d82e4b018727fea335b",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b3b5",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b3e2",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a57",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0ef12181aa1e6",
+              "https://www.sbgenomics.com/tcga/file/56607d84e4b016715ab6b6d6",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b093830b697659",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b093830b697745",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248af2",
+              "https://www.sbgenomics.com/tcga/follow_up/38320A4D-49F0-487D-9CE0-CED5A3ACE70C",
+              "https://www.sbgenomics.com/tcga/follow_up/56728895-ACEC-4B81-BD33-3B91222DE3C0",
+              "https://www.sbgenomics.com/tcga/sample/2A0FC5CD-C936-44E4-852A-8C2797CB8729",
+              "https://www.sbgenomics.com/tcga/sample/83A66A9D-916A-44E8-A7E6-A1385DB504DB"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasFile": [
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b08c5d8691b339",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b351",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0298dd2c899b7",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b08c5d8691b44f",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa2f9",
+              "https://www.sbgenomics.com/tcga/file/56607d81e4b0b37b3d992c39",
+              "https://www.sbgenomics.com/tcga/file/56607d83e4b0ec1099f8ed73",
+              "https://www.sbgenomics.com/tcga/file/56607d85e4b0ca31916504ee",
+              "https://www.sbgenomics.com/tcga/file/56607d86e4b0ca31916504f2",
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b0298dd2c8987a",
+              "https://www.sbgenomics.com/tcga/file/564a3bffe4b0ef12181aa199",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0298dd2c89895",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0298dd2c898ae",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b342",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b395",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b093830b69767f",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a80",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a8c",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0ef12181aa23f",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0298dd2c89998",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b08c5d8691b465",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b093830b6976e9",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248ae5",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248b14",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa25d",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa278",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b0ef12181aa28d",
+              "https://www.sbgenomics.com/tcga/file/564a3c02e4b08c5d8691b4ac",
+              "https://www.sbgenomics.com/tcga/file/56607d82e4b018727fea335b",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b3b5",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b08c5d8691b3e2",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b09c884b248a57",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b0ef12181aa1e6",
+              "https://www.sbgenomics.com/tcga/file/56607d84e4b016715ab6b6d6",
+              "https://www.sbgenomics.com/tcga/file/564a3c00e4b093830b697659",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b093830b697745",
+              "https://www.sbgenomics.com/tcga/file/564a3c01e4b09c884b248af2"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasID": [
+              "TCGA-BJ-A0ZF"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasAgeAtDiagnosis": [
+              "54"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasBatchNumber": [
+              "87"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasClinicalM": [
+              "https://www.sbgenomics.com/tcga/clinical_M/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasClinicalN": [
+              "https://www.sbgenomics.com/tcga/clinical_N/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasClinicalStage": [
+              "https://www.sbgenomics.com/tcga/clinical_stage/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasClinicalT": [
+              "https://www.sbgenomics.com/tcga/clinical_T/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasDaysToLastFollowUp": [
+              "210"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasDiseaseType": [
+              "https://www.sbgenomics.com/tcga/disease_type/thca"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasEthnicity": [
+              "https://www.sbgenomics.com/tcga/ethnicity/2"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasFollowUp": [
+              "https://www.sbgenomics.com/tcga/follow_up/38320A4D-49F0-487D-9CE0-CED5A3ACE70C",
+              "https://www.sbgenomics.com/tcga/follow_up/56728895-ACEC-4B81-BD33-3B91222DE3C0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasGender": [
+              "https://www.sbgenomics.com/tcga/gender/2"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasHistologicalDiagnosis": [
+              "https://www.sbgenomics.com/tcga/histological_type/169"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasIcd10": [
+              "C73"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasIcdO3Histology": [
+              "8335/3"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasIcdO3Site": [
+              "C73.9"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasInvestigation": [
+              "https://www.sbgenomics.com/tcga/investigation/tcga-thca"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasOtherHistologicalDiagnosis": [
+              "Follicular Carcinoma"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPathologicM": [
+              "https://www.sbgenomics.com/tcga/pathologic_M/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPathologicN": [
+              "https://www.sbgenomics.com/tcga/pathologic_N/5"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPathologicStage": [
+              "https://www.sbgenomics.com/tcga/pathologic_stage/16"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPathologicT": [
+              "https://www.sbgenomics.com/tcga/pathologic_T/11"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPerformanceStatusScoreECOG": [
+              "https://www.sbgenomics.com/tcga/eastern_cancer_oncology_group/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPerformanceStatusScoreKarnofsky": [
+              "https://www.sbgenomics.com/tcga/karnofsky_performance_score/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPerformanceStatusScoreTiming": [
+              "https://www.sbgenomics.com/tcga/performance_status_scale_timing/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPrimarySite": [
+              "https://www.sbgenomics.com/tcga/primary_site/thyroid"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPrimaryTherapyOutcomeSuccess": [
+              "https://www.sbgenomics.com/tcga/primary_therapy_outcome_success/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasPriorDiagnosis": [
+              "https://www.sbgenomics.com/tcga/prior_dx/1"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasProgram": [
+              "https://www.sbgenomics.com/program/TCGA"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasRace": [
+              "https://www.sbgenomics.com/tcga/race/2"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasSample": [
+              "https://www.sbgenomics.com/tcga/sample/2A0FC5CD-C936-44E4-852A-8C2797CB8729",
+              "https://www.sbgenomics.com/tcga/sample/83A66A9D-916A-44E8-A7E6-A1385DB504DB"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasTumorStatus": [
+              "https://www.sbgenomics.com/tcga/person_neoplasm_cancer_status/0"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasVitalStatus": [
+              "https://www.sbgenomics.com/tcga/vital_status/1"
+            ],
+            "https://semantics.sbgenomics.com/ontology/sbg#hasYearOfDiagnosis": [
+              "2010"
+            ],
+            "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+              "https://semantics.sbgenomics.com/ontology/sbg#Case"
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#label": [
+              "8BEEE000-ECAB-4A49-9C9D-BB8E677AE199"
+            ]
+          },
+          "ccle": {},
+          "tcga_grch38": {},
+          "target": {},
+          "cptac": {},
+          "tcia": {},
+          "icgc": {}
+        },
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "uri"
+        ]
+      },
+      "DatasetRoot": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0"
+            },
+            "query": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/query"
+            },
+            "aliquots": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/schema"
+            },
+            "analytes": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/analytes",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/analytes/schema"
+            },
+            "cases": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/cases",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/cases/schema"
+            },
+            "drug_therapies": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/drug_therapies",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/drug_therapies/schema"
+            },
+            "files": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/files",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/files/schema"
+            },
+            "follow_ups": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/follow_ups",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/follow_ups/schema"
+            },
+            "new_tumor_events": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/new_tumor_events",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/new_tumor_events/schema"
+            },
+            "portions": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/portions",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/portions/schema"
+            },
+            "radiation_therapies": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/radiation_therapies",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/radiation_therapies/schema"
+            },
+            "samples": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/samples",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/samples/schema"
+            },
+            "slides": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/slides",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/slides/schema"
+            },
+            "drugs": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/drugs",
+              "schema": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/drugs/schema"
+            }
+          }
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "query": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self",
+              "query"
+            ]
+          }
+        },
+        "required": [
+          "_links"
+        ]
+      },
+      "EntityList": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots"
+            },
+            "first": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots"
+            },
+            "last": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots?page=1467"
+            },
+            "next": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots?page=1"
+            }
+          },
+          "_embedded": {
+            "aliquots": [
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C"
+                  }
+                },
+                "label": "00012AA3-295D-4E23-AB5B-182E01F1D45C",
+                "id": "00012AA3-295D-4E23-AB5B-182E01F1D45C"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00013730-00F6-445A-B95A-C7E60E88C617"
+                  }
+                },
+                "label": "00013730-00F6-445A-B95A-C7E60E88C617",
+                "id": "00013730-00F6-445A-B95A-C7E60E88C617"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00014F01-24A5-4226-9ED6-4B9CABACD074"
+                  }
+                },
+                "label": "00014F01-24A5-4226-9ED6-4B9CABACD074",
+                "id": "00014F01-24A5-4226-9ED6-4B9CABACD074"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0001891B-675C-4FDE-911B-E267146C86A8"
+                  }
+                },
+                "label": "0001891B-675C-4FDE-911B-E267146C86A8",
+                "id": "0001891B-675C-4FDE-911B-E267146C86A8"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00025585-B50A-421E-A96C-5E29011421D7"
+                  }
+                },
+                "label": "00025585-B50A-421E-A96C-5E29011421D7",
+                "id": "00025585-B50A-421E-A96C-5E29011421D7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000297B0-854D-492C-8EBF-C48718C75489"
+                  }
+                },
+                "label": "000297B0-854D-492C-8EBF-C48718C75489",
+                "id": "000297B0-854D-492C-8EBF-C48718C75489"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0004802D-73D9-45FD-A460-EA223DA20491"
+                  }
+                },
+                "label": "0004802D-73D9-45FD-A460-EA223DA20491",
+                "id": "0004802D-73D9-45FD-A460-EA223DA20491"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0004C6DA-50ED-40B0-B1DC-E07FFFE5ABD8"
+                  }
+                },
+                "label": "0004C6DA-50ED-40B0-B1DC-E07FFFE5ABD8",
+                "id": "0004C6DA-50ED-40B0-B1DC-E07FFFE5ABD8"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000520ED-D9C8-496C-84B2-5F483AB271FD"
+                  }
+                },
+                "label": "000520ED-D9C8-496C-84B2-5F483AB271FD",
+                "id": "000520ED-D9C8-496C-84B2-5F483AB271FD"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000539FD-5730-4D5C-8F3C-4B11B972D295"
+                  }
+                },
+                "label": "000539FD-5730-4D5C-8F3C-4B11B972D295",
+                "id": "000539FD-5730-4D5C-8F3C-4B11B972D295"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00055BAD-54B7-4898-A9AE-3DD8036E62D3"
+                  }
+                },
+                "label": "00055BAD-54B7-4898-A9AE-3DD8036E62D3",
+                "id": "00055BAD-54B7-4898-A9AE-3DD8036E62D3"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00057167-09E0-4994-AAFC-F5F7A2FB2550"
+                  }
+                },
+                "label": "00057167-09E0-4994-AAFC-F5F7A2FB2550",
+                "id": "00057167-09E0-4994-AAFC-F5F7A2FB2550"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0005FEFF-0D0E-44DF-B4CB-DF334EBC1C1B"
+                  }
+                },
+                "label": "0005FEFF-0D0E-44DF-B4CB-DF334EBC1C1B",
+                "id": "0005FEFF-0D0E-44DF-B4CB-DF334EBC1C1B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00070C1E-5356-40D6-9FC8-70BF7FE3182D"
+                  }
+                },
+                "label": "00070C1E-5356-40D6-9FC8-70BF7FE3182D",
+                "id": "00070C1E-5356-40D6-9FC8-70BF7FE3182D"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00075575-E93E-4A96-A158-139387A4625B"
+                  }
+                },
+                "label": "00075575-E93E-4A96-A158-139387A4625B",
+                "id": "00075575-E93E-4A96-A158-139387A4625B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0007EC8A-A47A-4513-81D7-EEB2BA837110"
+                  }
+                },
+                "label": "0007EC8A-A47A-4513-81D7-EEB2BA837110",
+                "id": "0007EC8A-A47A-4513-81D7-EEB2BA837110"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000807CE-7517-4BDC-9291-8CA9228612C2"
+                  }
+                },
+                "label": "000807CE-7517-4BDC-9291-8CA9228612C2",
+                "id": "000807CE-7517-4BDC-9291-8CA9228612C2"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00082F05-73EA-4A8F-B803-3F6222F3250B"
+                  }
+                },
+                "label": "00082F05-73EA-4A8F-B803-3F6222F3250B",
+                "id": "00082F05-73EA-4A8F-B803-3F6222F3250B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0008C8DC-F219-46B8-8C32-689A07521AE6"
+                  }
+                },
+                "label": "0008C8DC-F219-46B8-8C32-689A07521AE6",
+                "id": "0008C8DC-F219-46B8-8C32-689A07521AE6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0009EFA7-2C71-4FB3-B2EA-24154D5DD5F1"
+                  }
+                },
+                "label": "0009EFA7-2C71-4FB3-B2EA-24154D5DD5F1",
+                "id": "0009EFA7-2C71-4FB3-B2EA-24154D5DD5F1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000AD139-85D7-4626-86AC-99575D42FDAD"
+                  }
+                },
+                "label": "000AD139-85D7-4626-86AC-99575D42FDAD",
+                "id": "000AD139-85D7-4626-86AC-99575D42FDAD"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000B2551-9C36-4712-A83F-C525689A2811"
+                  }
+                },
+                "label": "000B2551-9C36-4712-A83F-C525689A2811",
+                "id": "000B2551-9C36-4712-A83F-C525689A2811"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000B3CE1-5BCF-4DD5-B7E4-E4F9367A939B"
+                  }
+                },
+                "label": "000B3CE1-5BCF-4DD5-B7E4-E4F9367A939B",
+                "id": "000B3CE1-5BCF-4DD5-B7E4-E4F9367A939B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000BEF24-C05C-46EE-A84C-9611A41AEB4E"
+                  }
+                },
+                "label": "000BEF24-C05C-46EE-A84C-9611A41AEB4E",
+                "id": "000BEF24-C05C-46EE-A84C-9611A41AEB4E"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000C187A-0896-4C4A-81E8-36479B55B228"
+                  }
+                },
+                "label": "000C187A-0896-4C4A-81E8-36479B55B228",
+                "id": "000C187A-0896-4C4A-81E8-36479B55B228"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000C1B5F-3363-4BA4-BD80-D90E0370594D"
+                  }
+                },
+                "label": "000C1B5F-3363-4BA4-BD80-D90E0370594D",
+                "id": "000C1B5F-3363-4BA4-BD80-D90E0370594D"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000CF95A-AAEE-431A-A11C-4DBCAFFB782A"
+                  }
+                },
+                "label": "000CF95A-AAEE-431A-A11C-4DBCAFFB782A",
+                "id": "000CF95A-AAEE-431A-A11C-4DBCAFFB782A"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000D3209-ED54-49E5-88C1-39DA5D43E933"
+                  }
+                },
+                "label": "000D3209-ED54-49E5-88C1-39DA5D43E933",
+                "id": "000D3209-ED54-49E5-88C1-39DA5D43E933"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000D877F-8D03-44BC-8607-27B5BA84B5FE"
+                  }
+                },
+                "label": "000D877F-8D03-44BC-8607-27B5BA84B5FE",
+                "id": "000D877F-8D03-44BC-8607-27B5BA84B5FE"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000D919D-9A56-4CEA-A46C-F0854B2CCECC"
+                  }
+                },
+                "label": "000D919D-9A56-4CEA-A46C-F0854B2CCECC",
+                "id": "000D919D-9A56-4CEA-A46C-F0854B2CCECC"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000E3DEA-55D0-4E93-8D97-42FB8BE39CE5"
+                  }
+                },
+                "label": "000E3DEA-55D0-4E93-8D97-42FB8BE39CE5",
+                "id": "000E3DEA-55D0-4E93-8D97-42FB8BE39CE5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/000F5275-1E36-4DC4-99CE-9FDEC3689083"
+                  }
+                },
+                "label": "000F5275-1E36-4DC4-99CE-9FDEC3689083",
+                "id": "000F5275-1E36-4DC4-99CE-9FDEC3689083"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00109129-F028-492E-9BAA-047F404ECB4B"
+                  }
+                },
+                "label": "00109129-F028-492E-9BAA-047F404ECB4B",
+                "id": "00109129-F028-492E-9BAA-047F404ECB4B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00111BEB-5E06-46DD-9B81-86A462097CFA"
+                  }
+                },
+                "label": "00111BEB-5E06-46DD-9B81-86A462097CFA",
+                "id": "00111BEB-5E06-46DD-9B81-86A462097CFA"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00115777-F7E5-4931-A0F5-817F0CD55CCE"
+                  }
+                },
+                "label": "00115777-F7E5-4931-A0F5-817F0CD55CCE",
+                "id": "00115777-F7E5-4931-A0F5-817F0CD55CCE"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00117D98-BD69-47A1-8D4B-9F30FF0220F0"
+                  }
+                },
+                "label": "00117D98-BD69-47A1-8D4B-9F30FF0220F0",
+                "id": "00117D98-BD69-47A1-8D4B-9F30FF0220F0"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001201EC-E31A-4887-B4D7-9B4139B7CDF2"
+                  }
+                },
+                "label": "001201EC-E31A-4887-B4D7-9B4139B7CDF2",
+                "id": "001201EC-E31A-4887-B4D7-9B4139B7CDF2"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0012360F-99E4-4CCF-90E8-B5B1829CC602"
+                  }
+                },
+                "label": "0012360F-99E4-4CCF-90E8-B5B1829CC602",
+                "id": "0012360F-99E4-4CCF-90E8-B5B1829CC602"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00129F7C-8240-4100-9A22-033ABB70ABA6"
+                  }
+                },
+                "label": "00129F7C-8240-4100-9A22-033ABB70ABA6",
+                "id": "00129F7C-8240-4100-9A22-033ABB70ABA6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0012C39C-3A95-44DA-9570-3E24544B65A4"
+                  }
+                },
+                "label": "0012C39C-3A95-44DA-9570-3E24544B65A4",
+                "id": "0012C39C-3A95-44DA-9570-3E24544B65A4"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00133732-C949-4043-8DDE-217A6F4AB7A3"
+                  }
+                },
+                "label": "00133732-C949-4043-8DDE-217A6F4AB7A3",
+                "id": "00133732-C949-4043-8DDE-217A6F4AB7A3"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001443C3-137D-46AE-A767-87D453B32FBB"
+                  }
+                },
+                "label": "001443C3-137D-46AE-A767-87D453B32FBB",
+                "id": "001443C3-137D-46AE-A767-87D453B32FBB"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00146B33-A00E-4906-B3B2-E08FDF39EDCD"
+                  }
+                },
+                "label": "00146B33-A00E-4906-B3B2-E08FDF39EDCD",
+                "id": "00146B33-A00E-4906-B3B2-E08FDF39EDCD"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00153062-5990-4D08-B080-0C7EE47A58A0"
+                  }
+                },
+                "label": "00153062-5990-4D08-B080-0C7EE47A58A0",
+                "id": "00153062-5990-4D08-B080-0C7EE47A58A0"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0015340F-8749-43C5-9C04-33475BB29EB8"
+                  }
+                },
+                "label": "0015340F-8749-43C5-9C04-33475BB29EB8",
+                "id": "0015340F-8749-43C5-9C04-33475BB29EB8"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00168E86-D23A-48AE-8C60-36D970051907"
+                  }
+                },
+                "label": "00168E86-D23A-48AE-8C60-36D970051907",
+                "id": "00168E86-D23A-48AE-8C60-36D970051907"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0016BB20-F9AB-42AD-9D22-154BC12DFC14"
+                  }
+                },
+                "label": "0016BB20-F9AB-42AD-9D22-154BC12DFC14",
+                "id": "0016BB20-F9AB-42AD-9D22-154BC12DFC14"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001744E4-A776-4A61-BF4A-20307047D122"
+                  }
+                },
+                "label": "001744E4-A776-4A61-BF4A-20307047D122",
+                "id": "001744E4-A776-4A61-BF4A-20307047D122"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001773A6-9CF3-48A1-8EA1-1F0DA4991BC5"
+                  }
+                },
+                "label": "001773A6-9CF3-48A1-8EA1-1F0DA4991BC5",
+                "id": "001773A6-9CF3-48A1-8EA1-1F0DA4991BC5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00186124-CECF-4580-9DCA-CEF7C09F741C"
+                  }
+                },
+                "label": "00186124-CECF-4580-9DCA-CEF7C09F741C",
+                "id": "00186124-CECF-4580-9DCA-CEF7C09F741C"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0018CE1E-21F6-41CC-A93E-7633F6F76215"
+                  }
+                },
+                "label": "0018CE1E-21F6-41CC-A93E-7633F6F76215",
+                "id": "0018CE1E-21F6-41CC-A93E-7633F6F76215"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0018DFEC-4D08-4F56-9A05-962DDFB0DFC7"
+                  }
+                },
+                "label": "0018DFEC-4D08-4F56-9A05-962DDFB0DFC7",
+                "id": "0018DFEC-4D08-4F56-9A05-962DDFB0DFC7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00196819-0436-454B-9A45-5C893F49CD85"
+                  }
+                },
+                "label": "00196819-0436-454B-9A45-5C893F49CD85",
+                "id": "00196819-0436-454B-9A45-5C893F49CD85"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0019FFE9-2D75-41F4-AB3F-02E55DBE33AC"
+                  }
+                },
+                "label": "0019FFE9-2D75-41F4-AB3F-02E55DBE33AC",
+                "id": "0019FFE9-2D75-41F4-AB3F-02E55DBE33AC"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001A4955-4235-4AC3-8A36-175BEB557D01"
+                  }
+                },
+                "label": "001A4955-4235-4AC3-8A36-175BEB557D01",
+                "id": "001A4955-4235-4AC3-8A36-175BEB557D01"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001A859D-B577-49F9-B426-BEFDB8346799"
+                  }
+                },
+                "label": "001A859D-B577-49F9-B426-BEFDB8346799",
+                "id": "001A859D-B577-49F9-B426-BEFDB8346799"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001A9851-7EBD-4011-AFAD-145CC1673E22"
+                  }
+                },
+                "label": "001A9851-7EBD-4011-AFAD-145CC1673E22",
+                "id": "001A9851-7EBD-4011-AFAD-145CC1673E22"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001B2EF0-526E-46F5-8E76-F315023C070C"
+                  }
+                },
+                "label": "001B2EF0-526E-46F5-8E76-F315023C070C",
+                "id": "001B2EF0-526E-46F5-8E76-F315023C070C"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001C6478-B20D-40D8-AF62-C45C64269129"
+                  }
+                },
+                "label": "001C6478-B20D-40D8-AF62-C45C64269129",
+                "id": "001C6478-B20D-40D8-AF62-C45C64269129"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001CCFBE-71AC-42A9-9CC9-1C0F3B0F2358"
+                  }
+                },
+                "label": "001CCFBE-71AC-42A9-9CC9-1C0F3B0F2358",
+                "id": "001CCFBE-71AC-42A9-9CC9-1C0F3B0F2358"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001CFCD7-98CD-427A-9FED-2C6ED7999033"
+                  }
+                },
+                "label": "001CFCD7-98CD-427A-9FED-2C6ED7999033",
+                "id": "001CFCD7-98CD-427A-9FED-2C6ED7999033"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001EF1C2-CC64-4C1C-AFC3-13CF176CFFDD"
+                  }
+                },
+                "label": "001EF1C2-CC64-4C1C-AFC3-13CF176CFFDD",
+                "id": "001EF1C2-CC64-4C1C-AFC3-13CF176CFFDD"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001F4515-FF7A-415D-BC99-F1FA50E0B3BF"
+                  }
+                },
+                "label": "001F4515-FF7A-415D-BC99-F1FA50E0B3BF",
+                "id": "001F4515-FF7A-415D-BC99-F1FA50E0B3BF"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/001FFAB8-621B-4451-BD80-C5FE48622F6D"
+                  }
+                },
+                "label": "001FFAB8-621B-4451-BD80-C5FE48622F6D",
+                "id": "001FFAB8-621B-4451-BD80-C5FE48622F6D"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00207CB9-963A-469E-9FA9-BC01058B75A6"
+                  }
+                },
+                "label": "00207CB9-963A-469E-9FA9-BC01058B75A6",
+                "id": "00207CB9-963A-469E-9FA9-BC01058B75A6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0020E863-3F81-4B9C-A929-E7BEF336B2B6"
+                  }
+                },
+                "label": "0020E863-3F81-4B9C-A929-E7BEF336B2B6",
+                "id": "0020E863-3F81-4B9C-A929-E7BEF336B2B6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002223ED-583E-49A7-9367-CC3079D7F35F"
+                  }
+                },
+                "label": "002223ED-583E-49A7-9367-CC3079D7F35F",
+                "id": "002223ED-583E-49A7-9367-CC3079D7F35F"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0022EEE4-840E-4D18-AF42-06BB65A21207"
+                  }
+                },
+                "label": "0022EEE4-840E-4D18-AF42-06BB65A21207",
+                "id": "0022EEE4-840E-4D18-AF42-06BB65A21207"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00235961-D5DE-483A-BCD1-FAAE66FBE24B"
+                  }
+                },
+                "label": "00235961-D5DE-483A-BCD1-FAAE66FBE24B",
+                "id": "00235961-D5DE-483A-BCD1-FAAE66FBE24B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00240B70-5AAE-4B08-954E-5497AC4A587E"
+                  }
+                },
+                "label": "00240B70-5AAE-4B08-954E-5497AC4A587E",
+                "id": "00240B70-5AAE-4B08-954E-5497AC4A587E"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002416A4-7541-461C-9C1B-D0E2F4AB5A79"
+                  }
+                },
+                "label": "002416A4-7541-461C-9C1B-D0E2F4AB5A79",
+                "id": "002416A4-7541-461C-9C1B-D0E2F4AB5A79"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002431BA-ED0D-4CA6-B0A5-A16E63217C72"
+                  }
+                },
+                "label": "002431BA-ED0D-4CA6-B0A5-A16E63217C72",
+                "id": "002431BA-ED0D-4CA6-B0A5-A16E63217C72"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0024A863-759D-4124-A105-CC44D5C83740"
+                  }
+                },
+                "label": "0024A863-759D-4124-A105-CC44D5C83740",
+                "id": "0024A863-759D-4124-A105-CC44D5C83740"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00255D51-4169-4A2E-AAEE-9B205502989B"
+                  }
+                },
+                "label": "00255D51-4169-4A2E-AAEE-9B205502989B",
+                "id": "00255D51-4169-4A2E-AAEE-9B205502989B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002585E4-D695-47B6-AF2C-3429073BC0B4"
+                  }
+                },
+                "label": "002585E4-D695-47B6-AF2C-3429073BC0B4",
+                "id": "002585E4-D695-47B6-AF2C-3429073BC0B4"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00259F0C-944D-4C3E-AE28-CFB7A1BE7B40"
+                  }
+                },
+                "label": "00259F0C-944D-4C3E-AE28-CFB7A1BE7B40",
+                "id": "00259F0C-944D-4C3E-AE28-CFB7A1BE7B40"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0025B1E2-9354-4871-8901-43CB5C57E761"
+                  }
+                },
+                "label": "0025B1E2-9354-4871-8901-43CB5C57E761",
+                "id": "0025B1E2-9354-4871-8901-43CB5C57E761"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0025BA57-9547-4DDB-AB92-E81FDBE7FF0D"
+                  }
+                },
+                "label": "0025BA57-9547-4DDB-AB92-E81FDBE7FF0D",
+                "id": "0025BA57-9547-4DDB-AB92-E81FDBE7FF0D"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0025F09A-E391-403C-88D0-76B5BBBC85D8"
+                  }
+                },
+                "label": "0025F09A-E391-403C-88D0-76B5BBBC85D8",
+                "id": "0025F09A-E391-403C-88D0-76B5BBBC85D8"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0026405B-73E3-4F42-AB52-702D26FCB5BB"
+                  }
+                },
+                "label": "0026405B-73E3-4F42-AB52-702D26FCB5BB",
+                "id": "0026405B-73E3-4F42-AB52-702D26FCB5BB"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00269798-26F2-4A34-9A1B-41D09E71C854"
+                  }
+                },
+                "label": "00269798-26F2-4A34-9A1B-41D09E71C854",
+                "id": "00269798-26F2-4A34-9A1B-41D09E71C854"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0026DE2F-DA6F-4FAC-9A05-A642F9459C4F"
+                  }
+                },
+                "label": "0026DE2F-DA6F-4FAC-9A05-A642F9459C4F",
+                "id": "0026DE2F-DA6F-4FAC-9A05-A642F9459C4F"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0026F950-5B53-4100-BA61-2AACBD22E833"
+                  }
+                },
+                "label": "0026F950-5B53-4100-BA61-2AACBD22E833",
+                "id": "0026F950-5B53-4100-BA61-2AACBD22E833"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00271AC8-B3B7-49D6-A89A-26EF540C7966"
+                  }
+                },
+                "label": "00271AC8-B3B7-49D6-A89A-26EF540C7966",
+                "id": "00271AC8-B3B7-49D6-A89A-26EF540C7966"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0027CC16-3E1D-49F5-BE0F-889CFD7E9F67"
+                  }
+                },
+                "label": "0027CC16-3E1D-49F5-BE0F-889CFD7E9F67",
+                "id": "0027CC16-3E1D-49F5-BE0F-889CFD7E9F67"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0028151C-00B7-4453-943A-560F3F955A9A"
+                  }
+                },
+                "label": "0028151C-00B7-4453-943A-560F3F955A9A",
+                "id": "0028151C-00B7-4453-943A-560F3F955A9A"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/0028ACCF-446D-4083-BF9D-7BAA611D71EC"
+                  }
+                },
+                "label": "0028ACCF-446D-4083-BF9D-7BAA611D71EC",
+                "id": "0028ACCF-446D-4083-BF9D-7BAA611D71EC"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002A04F8-A975-4E76-BB60-7C9439B10F7F"
+                  }
+                },
+                "label": "002A04F8-A975-4E76-BB60-7C9439B10F7F",
+                "id": "002A04F8-A975-4E76-BB60-7C9439B10F7F"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002A3041-247D-4CF6-B81A-A4E04857E872"
+                  }
+                },
+                "label": "002A3041-247D-4CF6-B81A-A4E04857E872",
+                "id": "002A3041-247D-4CF6-B81A-A4E04857E872"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002A956C-2712-4381-A28D-9ADB1F0CA0A6"
+                  }
+                },
+                "label": "002A956C-2712-4381-A28D-9ADB1F0CA0A6",
+                "id": "002A956C-2712-4381-A28D-9ADB1F0CA0A6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002AAD87-0BF8-4728-BA7F-216133CD8A12"
+                  }
+                },
+                "label": "002AAD87-0BF8-4728-BA7F-216133CD8A12",
+                "id": "002AAD87-0BF8-4728-BA7F-216133CD8A12"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002AB39B-FF73-48CF-8CAE-2C4E3F0DA244"
+                  }
+                },
+                "label": "002AB39B-FF73-48CF-8CAE-2C4E3F0DA244",
+                "id": "002AB39B-FF73-48CF-8CAE-2C4E3F0DA244"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002BB3A4-C3AB-4326-9F72-6838158EF020"
+                  }
+                },
+                "label": "002BB3A4-C3AB-4326-9F72-6838158EF020",
+                "id": "002BB3A4-C3AB-4326-9F72-6838158EF020"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002C82CB-2B9E-48CD-8062-FAA1120E0F26"
+                  }
+                },
+                "label": "002C82CB-2B9E-48CD-8062-FAA1120E0F26",
+                "id": "002C82CB-2B9E-48CD-8062-FAA1120E0F26"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002D03E2-A0CD-404A-8371-99B83E3F584B"
+                  }
+                },
+                "label": "002D03E2-A0CD-404A-8371-99B83E3F584B",
+                "id": "002D03E2-A0CD-404A-8371-99B83E3F584B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002D83AF-9D57-4DDF-B6E4-99D541A4359B"
+                  }
+                },
+                "label": "002D83AF-9D57-4DDF-B6E4-99D541A4359B",
+                "id": "002D83AF-9D57-4DDF-B6E4-99D541A4359B"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002DADB4-404F-41DB-B4B9-F14B1246B4A8"
+                  }
+                },
+                "label": "002DADB4-404F-41DB-B4B9-F14B1246B4A8",
+                "id": "002DADB4-404F-41DB-B4B9-F14B1246B4A8"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002E1BDF-129B-4D1A-A41B-9D4898B67F36"
+                  }
+                },
+                "label": "002E1BDF-129B-4D1A-A41B-9D4898B67F36",
+                "id": "002E1BDF-129B-4D1A-A41B-9D4898B67F36"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002E2FAE-9E30-4800-B23E-8F23BD16AD56"
+                  }
+                },
+                "label": "002E2FAE-9E30-4800-B23E-8F23BD16AD56",
+                "id": "002E2FAE-9E30-4800-B23E-8F23BD16AD56"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/002E6D9C-3085-41DA-AE05-E8BAC069C9CE"
+                  }
+                },
+                "label": "002E6D9C-3085-41DA-AE05-E8BAC069C9CE",
+                "id": "002E6D9C-3085-41DA-AE05-E8BAC069C9CE"
+              }
+            ]
+          },
+          "total": 146701,
+          "count": 100
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "first": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "last": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "next": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self",
+              "first",
+              "last"
+            ]
+          },
+          "_embedded": {
+            "type": "object"
+          },
+          "total": {
+            "type": "number"
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "_links",
+          "_embedded",
+          "total",
+          "count"
+        ]
+      },
+      "Entity": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C"
+            },
+            "hasAnalyte": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C/analytes"
+            },
+            "hasFile": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C/files"
+            }
+          },
+          "id": "00012AA3-295D-4E23-AB5B-182E01F1D45C",
+          "hasConcentration": 0.5,
+          "label": "00012AA3-295D-4E23-AB5B-182E01F1D45C",
+          "hasID": "TCGA-25-1322-10A-01W-0490-10"
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "_links",
+          "id",
+          "label"
+        ]
+      },
+      "EntityListForSpecificEntity": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C/files"
+            },
+            "first": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C/files"
+            },
+            "last": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/aliquots/00012AA3-295D-4E23-AB5B-182E01F1D45C/files?page=0"
+            }
+          },
+          "_embedded": {
+            "files": [
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-datasets-api.sbgenomics.com/datasets/tcga/v0/files/564a393ee4b0ef121819c07f"
+                  }
+                },
+                "label": "nationwidechildrens.org_biospecimen.TCGA-25-1322.xml",
+                "id": "564a393ee4b0ef121819c07f",
+                "hasIndex": null
+              }
+            ]
+          },
+          "total": 1,
+          "count": 1
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "first": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "last": {
+                "$ref": "#/components/schemas/Href"
+              },
+              "next": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self",
+              "first",
+              "last"
+            ]
+          },
+          "_embedded": {
+            "type": "object"
+          },
+          "total": {
+            "type": "number"
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "_links",
+          "_embedded",
+          "total",
+          "count"
+        ]
+      },
+      "SchemaForAnEntity": {
+        "example": {
+          "_links": {
+            "self": {
+              "href": "https://cgc-datasets-api.sbgenomics.com/datasets/v0/tcga/aliquots/schema"
+            },
+            "hasAnalyte": "anyURI",
+            "hasFile": "anyURI"
+          },
+          "label": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "hasAmount": {
+            "type": "decimal"
+          },
+          "hasConcentration": {
+            "type": "decimal"
+          },
+          "hasID": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "#/components/schemas/Href"
+              }
+            },
+            "required": [
+              "self"
+            ]
+          },
+          "label": {
+            "type": "object"
+          },
+          "id": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "_links",
+          "label",
+          "id"
+        ]
+      },
+      "DslQueryRequest": {
+        "example": {
+          "entity": "cases",
+          "hasSample": {
+            "hasSampleType": "Primary Tumor",
+            "hasPortion": {
+              "hasPortionNumber": "11"
+            }
+          },
+          "hasNewTumorEvent": {
+            "hasNewTumorAnatomicSite": [
+              "Liver",
+              "Pelvis"
+            ],
+            "hasNewTumorEventType": {
+              "filter": {
+                "contains": "Distant Metastasis"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "entity"
+        ]
+      },
+      "DslQueryResponse": {
+        "example": {
+          "_embedded": {
+            "cases": [
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/018f93ad-92ef-4bbb-a0fb-dc407a289daa"
+                  }
+                },
+                "label": "018f93ad-92ef-4bbb-a0fb-dc407a289daa",
+                "id": "018f93ad-92ef-4bbb-a0fb-dc407a289daa"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0264c9c2-6b6a-485c-98f5-aed4f52ed0ca"
+                  }
+                },
+                "label": "0264c9c2-6b6a-485c-98f5-aed4f52ed0ca",
+                "id": "0264c9c2-6b6a-485c-98f5-aed4f52ed0ca"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/02d98b0a-8360-49b9-bbd6-b70c79cbd32d"
+                  }
+                },
+                "label": "02d98b0a-8360-49b9-bbd6-b70c79cbd32d",
+                "id": "02d98b0a-8360-49b9-bbd6-b70c79cbd32d"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0304b12d-7640-4150-a581-2eea2b1f2ad5"
+                  }
+                },
+                "label": "0304b12d-7640-4150-a581-2eea2b1f2ad5",
+                "id": "0304b12d-7640-4150-a581-2eea2b1f2ad5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/04d45a95-4282-42e7-8e2f-2b7a5082e1b5"
+                  }
+                },
+                "label": "04d45a95-4282-42e7-8e2f-2b7a5082e1b5",
+                "id": "04d45a95-4282-42e7-8e2f-2b7a5082e1b5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0500f1a6-a528-43f3-b035-12d3b7c99c0f"
+                  }
+                },
+                "label": "0500f1a6-a528-43f3-b035-12d3b7c99c0f",
+                "id": "0500f1a6-a528-43f3-b035-12d3b7c99c0f"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/075dbfd0-9cf4-4877-884f-ae858902c79e"
+                  }
+                },
+                "label": "075dbfd0-9cf4-4877-884f-ae858902c79e",
+                "id": "075dbfd0-9cf4-4877-884f-ae858902c79e"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/078dc5f1-d2dc-4408-b785-27703c7813f1"
+                  }
+                },
+                "label": "078dc5f1-d2dc-4408-b785-27703c7813f1",
+                "id": "078dc5f1-d2dc-4408-b785-27703c7813f1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/07a6bbce-012b-48fe-8c62-e79a1b200eb6"
+                  }
+                },
+                "label": "07a6bbce-012b-48fe-8c62-e79a1b200eb6",
+                "id": "07a6bbce-012b-48fe-8c62-e79a1b200eb6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/07b7dc7b-9407-4f11-9cd9-3b6df8d1cf6c"
+                  }
+                },
+                "label": "07b7dc7b-9407-4f11-9cd9-3b6df8d1cf6c",
+                "id": "07b7dc7b-9407-4f11-9cd9-3b6df8d1cf6c"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/08dd606a-1982-4cb9-bcd6-09d4bc158f6d"
+                  }
+                },
+                "label": "08dd606a-1982-4cb9-bcd6-09d4bc158f6d",
+                "id": "08dd606a-1982-4cb9-bcd6-09d4bc158f6d"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/09fd6d9e-c715-4d57-88f9-238dd74c79a7"
+                  }
+                },
+                "label": "09fd6d9e-c715-4d57-88f9-238dd74c79a7",
+                "id": "09fd6d9e-c715-4d57-88f9-238dd74c79a7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0a4af73d-3c12-4740-bf92-c0eedd3dd135"
+                  }
+                },
+                "label": "0a4af73d-3c12-4740-bf92-c0eedd3dd135",
+                "id": "0a4af73d-3c12-4740-bf92-c0eedd3dd135"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0b4b50c7-aa0b-4a64-807b-d3cb47eeeb6f"
+                  }
+                },
+                "label": "0b4b50c7-aa0b-4a64-807b-d3cb47eeeb6f",
+                "id": "0b4b50c7-aa0b-4a64-807b-d3cb47eeeb6f"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/0b787bdb-949d-499c-aece-7a3977fcd198"
+                  }
+                },
+                "label": "0b787bdb-949d-499c-aece-7a3977fcd198",
+                "id": "0b787bdb-949d-499c-aece-7a3977fcd198"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/10c825d7-4e21-43e7-ac95-dda75fbdaf74"
+                  }
+                },
+                "label": "10c825d7-4e21-43e7-ac95-dda75fbdaf74",
+                "id": "10c825d7-4e21-43e7-ac95-dda75fbdaf74"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/14213209-2217-4812-9a19-d9b2b6718467"
+                  }
+                },
+                "label": "14213209-2217-4812-9a19-d9b2b6718467",
+                "id": "14213209-2217-4812-9a19-d9b2b6718467"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/1946f60d-51ca-48ba-8e94-79142594986e"
+                  }
+                },
+                "label": "1946f60d-51ca-48ba-8e94-79142594986e",
+                "id": "1946f60d-51ca-48ba-8e94-79142594986e"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/1f505ffa-b551-44a5-8813-c44c2bfcb4d5"
+                  }
+                },
+                "label": "1f505ffa-b551-44a5-8813-c44c2bfcb4d5",
+                "id": "1f505ffa-b551-44a5-8813-c44c2bfcb4d5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/233cb00f-b470-47fb-ad93-2a1597655ed6"
+                  }
+                },
+                "label": "233cb00f-b470-47fb-ad93-2a1597655ed6",
+                "id": "233cb00f-b470-47fb-ad93-2a1597655ed6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/28153e3e-8515-4852-aaa0-247f86399f27"
+                  }
+                },
+                "label": "28153e3e-8515-4852-aaa0-247f86399f27",
+                "id": "28153e3e-8515-4852-aaa0-247f86399f27"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/2b794eae-814c-4b5c-b276-be9096b94f94"
+                  }
+                },
+                "label": "2b794eae-814c-4b5c-b276-be9096b94f94",
+                "id": "2b794eae-814c-4b5c-b276-be9096b94f94"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/31aca8a3-7107-4b9d-8b6a-c07caa2a9339"
+                  }
+                },
+                "label": "31aca8a3-7107-4b9d-8b6a-c07caa2a9339",
+                "id": "31aca8a3-7107-4b9d-8b6a-c07caa2a9339"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/3af31fcf-ad0c-4fd9-a8e3-10f9176b5e9d"
+                  }
+                },
+                "label": "3af31fcf-ad0c-4fd9-a8e3-10f9176b5e9d",
+                "id": "3af31fcf-ad0c-4fd9-a8e3-10f9176b5e9d"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/40551d53-388b-4067-9341-76e94d023703"
+                  }
+                },
+                "label": "40551d53-388b-4067-9341-76e94d023703",
+                "id": "40551d53-388b-4067-9341-76e94d023703"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/43b7a790-35a2-4786-b375-c3847d2aec62"
+                  }
+                },
+                "label": "43b7a790-35a2-4786-b375-c3847d2aec62",
+                "id": "43b7a790-35a2-4786-b375-c3847d2aec62"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/479d7a5a-63dc-412b-9075-920525334fe7"
+                  }
+                },
+                "label": "479d7a5a-63dc-412b-9075-920525334fe7",
+                "id": "479d7a5a-63dc-412b-9075-920525334fe7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/4c9e6085-41c3-4cfe-ad3d-5f94196a86e0"
+                  }
+                },
+                "label": "4c9e6085-41c3-4cfe-ad3d-5f94196a86e0",
+                "id": "4c9e6085-41c3-4cfe-ad3d-5f94196a86e0"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/507a4e05-d5ab-4dbb-9b4f-76b1a21b79dd"
+                  }
+                },
+                "label": "507a4e05-d5ab-4dbb-9b4f-76b1a21b79dd",
+                "id": "507a4e05-d5ab-4dbb-9b4f-76b1a21b79dd"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/5aa57fff-4515-4076-8798-55015bb4f156"
+                  }
+                },
+                "label": "5aa57fff-4515-4076-8798-55015bb4f156",
+                "id": "5aa57fff-4515-4076-8798-55015bb4f156"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/5c51fbfe-153c-4cd2-97bd-e444daa0b20f"
+                  }
+                },
+                "label": "5c51fbfe-153c-4cd2-97bd-e444daa0b20f",
+                "id": "5c51fbfe-153c-4cd2-97bd-e444daa0b20f"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/5f3e2974-f1df-47a2-8a8a-29bb525eeef6"
+                  }
+                },
+                "label": "5f3e2974-f1df-47a2-8a8a-29bb525eeef6",
+                "id": "5f3e2974-f1df-47a2-8a8a-29bb525eeef6"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/60419f8c-92c2-4e8f-b2fa-a767d30c9d59"
+                  }
+                },
+                "label": "60419f8c-92c2-4e8f-b2fa-a767d30c9d59",
+                "id": "60419f8c-92c2-4e8f-b2fa-a767d30c9d59"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/606dc5b8-7625-42a6-a936-504ef25623a4"
+                  }
+                },
+                "label": "606dc5b8-7625-42a6-a936-504ef25623a4",
+                "id": "606dc5b8-7625-42a6-a936-504ef25623a4"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/61df8a4b-95f8-40ab-a252-d00c4300c290"
+                  }
+                },
+                "label": "61df8a4b-95f8-40ab-a252-d00c4300c290",
+                "id": "61df8a4b-95f8-40ab-a252-d00c4300c290"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/62df1bd8-23a8-4e52-a483-6895b2f02494"
+                  }
+                },
+                "label": "62df1bd8-23a8-4e52-a483-6895b2f02494",
+                "id": "62df1bd8-23a8-4e52-a483-6895b2f02494"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/653f1d34-73e9-4216-b40b-e25c1cfc7943"
+                  }
+                },
+                "label": "653f1d34-73e9-4216-b40b-e25c1cfc7943",
+                "id": "653f1d34-73e9-4216-b40b-e25c1cfc7943"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/65d1eaec-28db-4a41-a4db-1a710fcb24ad"
+                  }
+                },
+                "label": "65d1eaec-28db-4a41-a4db-1a710fcb24ad",
+                "id": "65d1eaec-28db-4a41-a4db-1a710fcb24ad"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/66118386-6ffe-4375-97d3-01908814ae32"
+                  }
+                },
+                "label": "66118386-6ffe-4375-97d3-01908814ae32",
+                "id": "66118386-6ffe-4375-97d3-01908814ae32"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/6be5176c-4980-4663-adff-d04f05737da0"
+                  }
+                },
+                "label": "6be5176c-4980-4663-adff-d04f05737da0",
+                "id": "6be5176c-4980-4663-adff-d04f05737da0"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/6fa6ace1-4b39-44db-9413-73eb21588aa1"
+                  }
+                },
+                "label": "6fa6ace1-4b39-44db-9413-73eb21588aa1",
+                "id": "6fa6ace1-4b39-44db-9413-73eb21588aa1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/70797499-16e6-48cc-8ae4-1e692713dad3"
+                  }
+                },
+                "label": "70797499-16e6-48cc-8ae4-1e692713dad3",
+                "id": "70797499-16e6-48cc-8ae4-1e692713dad3"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/73b3e4dd-c53d-4fe3-8607-ee462c9cbbd1"
+                  }
+                },
+                "label": "73b3e4dd-c53d-4fe3-8607-ee462c9cbbd1",
+                "id": "73b3e4dd-c53d-4fe3-8607-ee462c9cbbd1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/743fc661-9ba2-4fa8-966e-508fb4b965e0"
+                  }
+                },
+                "label": "743fc661-9ba2-4fa8-966e-508fb4b965e0",
+                "id": "743fc661-9ba2-4fa8-966e-508fb4b965e0"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/79823022-7feb-49de-8de7-607721b595d2"
+                  }
+                },
+                "label": "79823022-7feb-49de-8de7-607721b595d2",
+                "id": "79823022-7feb-49de-8de7-607721b595d2"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/7db75a66-3e9d-40e1-93c0-23f3630d6a9c"
+                  }
+                },
+                "label": "7db75a66-3e9d-40e1-93c0-23f3630d6a9c",
+                "id": "7db75a66-3e9d-40e1-93c0-23f3630d6a9c"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/83a93378-0978-4102-9e4b-09b547b75687"
+                  }
+                },
+                "label": "83a93378-0978-4102-9e4b-09b547b75687",
+                "id": "83a93378-0978-4102-9e4b-09b547b75687"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/888a7158-2319-4563-849b-573705c72ab7"
+                  }
+                },
+                "label": "888a7158-2319-4563-849b-573705c72ab7",
+                "id": "888a7158-2319-4563-849b-573705c72ab7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/892e7630-b11e-47bd-987c-327d33258e11"
+                  }
+                },
+                "label": "892e7630-b11e-47bd-987c-327d33258e11",
+                "id": "892e7630-b11e-47bd-987c-327d33258e11"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/8bd783a3-d6c9-4c87-a2a1-09f903b9c7ca"
+                  }
+                },
+                "label": "8bd783a3-d6c9-4c87-a2a1-09f903b9c7ca",
+                "id": "8bd783a3-d6c9-4c87-a2a1-09f903b9c7ca"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/8d9bd437-8b4b-4da5-87ba-6b5790f05022"
+                  }
+                },
+                "label": "8d9bd437-8b4b-4da5-87ba-6b5790f05022",
+                "id": "8d9bd437-8b4b-4da5-87ba-6b5790f05022"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/8de236f1-c029-44df-a2a9-319145488baa"
+                  }
+                },
+                "label": "8de236f1-c029-44df-a2a9-319145488baa",
+                "id": "8de236f1-c029-44df-a2a9-319145488baa"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/92fca97d-6123-46a7-9c34-7a6f877fe612"
+                  }
+                },
+                "label": "92fca97d-6123-46a7-9c34-7a6f877fe612",
+                "id": "92fca97d-6123-46a7-9c34-7a6f877fe612"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/9ef5cdda-8aba-4027-8cf0-e53b2f54704a"
+                  }
+                },
+                "label": "9ef5cdda-8aba-4027-8cf0-e53b2f54704a",
+                "id": "9ef5cdda-8aba-4027-8cf0-e53b2f54704a"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/a1206473-cf9d-4bca-97c9-67f35817b806"
+                  }
+                },
+                "label": "a1206473-cf9d-4bca-97c9-67f35817b806",
+                "id": "a1206473-cf9d-4bca-97c9-67f35817b806"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/a37238f3-55b5-43df-a0c5-3d22ee5156f3"
+                  }
+                },
+                "label": "a37238f3-55b5-43df-a0c5-3d22ee5156f3",
+                "id": "a37238f3-55b5-43df-a0c5-3d22ee5156f3"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/a5748656-5330-417a-8938-01f69ddb3576"
+                  }
+                },
+                "label": "a5748656-5330-417a-8938-01f69ddb3576",
+                "id": "a5748656-5330-417a-8938-01f69ddb3576"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/a6ff0b7a-1d04-4a64-af43-5011a4487cb2"
+                  }
+                },
+                "label": "a6ff0b7a-1d04-4a64-af43-5011a4487cb2",
+                "id": "a6ff0b7a-1d04-4a64-af43-5011a4487cb2"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/a8ce2be1-1f15-4e02-9161-5f161447a541"
+                  }
+                },
+                "label": "a8ce2be1-1f15-4e02-9161-5f161447a541",
+                "id": "a8ce2be1-1f15-4e02-9161-5f161447a541"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/aa14ffb4-a715-4636-8251-73d019dddd8c"
+                  }
+                },
+                "label": "aa14ffb4-a715-4636-8251-73d019dddd8c",
+                "id": "aa14ffb4-a715-4636-8251-73d019dddd8c"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/aa3d2d17-19e3-4b76-8235-98550f49dc91"
+                  }
+                },
+                "label": "aa3d2d17-19e3-4b76-8235-98550f49dc91",
+                "id": "aa3d2d17-19e3-4b76-8235-98550f49dc91"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/aa88ce53-8439-40bd-8d93-e1d903d1c7fb"
+                  }
+                },
+                "label": "aa88ce53-8439-40bd-8d93-e1d903d1c7fb",
+                "id": "aa88ce53-8439-40bd-8d93-e1d903d1c7fb"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/aac385c1-42f9-4d9e-b9bf-94ca13ebc5ae"
+                  }
+                },
+                "label": "aac385c1-42f9-4d9e-b9bf-94ca13ebc5ae",
+                "id": "aac385c1-42f9-4d9e-b9bf-94ca13ebc5ae"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/aaf93a92-2f93-477d-9ea4-d18ab7d4f258"
+                  }
+                },
+                "label": "aaf93a92-2f93-477d-9ea4-d18ab7d4f258",
+                "id": "aaf93a92-2f93-477d-9ea4-d18ab7d4f258"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/b533e555-90cf-4657-80c6-15b67da8ad26"
+                  }
+                },
+                "label": "b533e555-90cf-4657-80c6-15b67da8ad26",
+                "id": "b533e555-90cf-4657-80c6-15b67da8ad26"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/b5c516ba-4785-41dc-bd07-b129d47808dd"
+                  }
+                },
+                "label": "b5c516ba-4785-41dc-bd07-b129d47808dd",
+                "id": "b5c516ba-4785-41dc-bd07-b129d47808dd"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/b9b61cf9-8711-4c3a-8511-659070cfe36b"
+                  }
+                },
+                "label": "b9b61cf9-8711-4c3a-8511-659070cfe36b",
+                "id": "b9b61cf9-8711-4c3a-8511-659070cfe36b"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/bd1c3d3b-d174-4186-bb35-364e167a1d18"
+                  }
+                },
+                "label": "bd1c3d3b-d174-4186-bb35-364e167a1d18",
+                "id": "bd1c3d3b-d174-4186-bb35-364e167a1d18"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/bf3074e6-8780-490e-a8c3-4237c19ca877"
+                  }
+                },
+                "label": "bf3074e6-8780-490e-a8c3-4237c19ca877",
+                "id": "bf3074e6-8780-490e-a8c3-4237c19ca877"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/bfb21f9b-31af-4ecc-a4f4-d7d3f5728e01"
+                  }
+                },
+                "label": "bfb21f9b-31af-4ecc-a4f4-d7d3f5728e01",
+                "id": "bfb21f9b-31af-4ecc-a4f4-d7d3f5728e01"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ca400ea1-3e4e-437e-a54c-446431b741da"
+                  }
+                },
+                "label": "ca400ea1-3e4e-437e-a54c-446431b741da",
+                "id": "ca400ea1-3e4e-437e-a54c-446431b741da"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/cd9dc5c5-1161-43ea-a617-1356a3b23e16"
+                  }
+                },
+                "label": "cd9dc5c5-1161-43ea-a617-1356a3b23e16",
+                "id": "cd9dc5c5-1161-43ea-a617-1356a3b23e16"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ceaf98f8-517e-457a-bf29-acfe22893d49"
+                  }
+                },
+                "label": "ceaf98f8-517e-457a-bf29-acfe22893d49",
+                "id": "ceaf98f8-517e-457a-bf29-acfe22893d49"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/cf332daa-f335-4af1-81de-cbfdafb0f764"
+                  }
+                },
+                "label": "cf332daa-f335-4af1-81de-cbfdafb0f764",
+                "id": "cf332daa-f335-4af1-81de-cbfdafb0f764"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/d125a297-88be-4500-8ef8-b8bb02362f2b"
+                  }
+                },
+                "label": "d125a297-88be-4500-8ef8-b8bb02362f2b",
+                "id": "d125a297-88be-4500-8ef8-b8bb02362f2b"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/d14154a5-9c8a-4c55-8c2d-64f3cad7b7d5"
+                  }
+                },
+                "label": "d14154a5-9c8a-4c55-8c2d-64f3cad7b7d5",
+                "id": "d14154a5-9c8a-4c55-8c2d-64f3cad7b7d5"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/d890cbf7-41d8-4992-99c2-24c60c77b156"
+                  }
+                },
+                "label": "d890cbf7-41d8-4992-99c2-24c60c77b156",
+                "id": "d890cbf7-41d8-4992-99c2-24c60c77b156"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/da33c637-e9db-4a67-9198-2eda750dead7"
+                  }
+                },
+                "label": "da33c637-e9db-4a67-9198-2eda750dead7",
+                "id": "da33c637-e9db-4a67-9198-2eda750dead7"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/dc321b92-7275-48c9-adeb-7670db3195ef"
+                  }
+                },
+                "label": "dc321b92-7275-48c9-adeb-7670db3195ef",
+                "id": "dc321b92-7275-48c9-adeb-7670db3195ef"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/dd3a6357-9087-44b2-9956-f981e0de6f1c"
+                  }
+                },
+                "label": "dd3a6357-9087-44b2-9956-f981e0de6f1c",
+                "id": "dd3a6357-9087-44b2-9956-f981e0de6f1c"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/df941bc1-6356-4f2e-a3f5-ae190266b441"
+                  }
+                },
+                "label": "df941bc1-6356-4f2e-a3f5-ae190266b441",
+                "id": "df941bc1-6356-4f2e-a3f5-ae190266b441"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/dfd687bc-6e69-42f7-af94-d17fc150d1a1"
+                  }
+                },
+                "label": "dfd687bc-6e69-42f7-af94-d17fc150d1a1",
+                "id": "dfd687bc-6e69-42f7-af94-d17fc150d1a1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/e12d142e-7339-48fc-b17a-9e311b65327f"
+                  }
+                },
+                "label": "e12d142e-7339-48fc-b17a-9e311b65327f",
+                "id": "e12d142e-7339-48fc-b17a-9e311b65327f"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/e21d8018-8fe9-4c92-8b36-28d7d3f7df2b"
+                  }
+                },
+                "label": "e21d8018-8fe9-4c92-8b36-28d7d3f7df2b",
+                "id": "e21d8018-8fe9-4c92-8b36-28d7d3f7df2b"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ea3a524b-6ee3-4904-8924-29fcaa20985c"
+                  }
+                },
+                "label": "ea3a524b-6ee3-4904-8924-29fcaa20985c",
+                "id": "ea3a524b-6ee3-4904-8924-29fcaa20985c"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/eb9a558c-39ef-42c0-8dfc-64d01b729426"
+                  }
+                },
+                "label": "eb9a558c-39ef-42c0-8dfc-64d01b729426",
+                "id": "eb9a558c-39ef-42c0-8dfc-64d01b729426"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ebad8bc9-f196-4f53-bfea-de38488eb4e1"
+                  }
+                },
+                "label": "ebad8bc9-f196-4f53-bfea-de38488eb4e1",
+                "id": "ebad8bc9-f196-4f53-bfea-de38488eb4e1"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ec54924b-2463-4364-a8fc-6d5a7df0b444"
+                  }
+                },
+                "label": "ec54924b-2463-4364-a8fc-6d5a7df0b444",
+                "id": "ec54924b-2463-4364-a8fc-6d5a7df0b444"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ec9ac713-08e9-4559-b606-5f58d2c4df50"
+                  }
+                },
+                "label": "ec9ac713-08e9-4559-b606-5f58d2c4df50",
+                "id": "ec9ac713-08e9-4559-b606-5f58d2c4df50"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ec9c3efe-af61-4deb-b047-dcf7ee735fd2"
+                  }
+                },
+                "label": "ec9c3efe-af61-4deb-b047-dcf7ee735fd2",
+                "id": "ec9c3efe-af61-4deb-b047-dcf7ee735fd2"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/edbf6720-467e-4928-b1cb-0e7336358d18"
+                  }
+                },
+                "label": "edbf6720-467e-4928-b1cb-0e7336358d18",
+                "id": "edbf6720-467e-4928-b1cb-0e7336358d18"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/f23794d7-35cc-4550-a03f-8e3cde1a2bcd"
+                  }
+                },
+                "label": "f23794d7-35cc-4550-a03f-8e3cde1a2bcd",
+                "id": "f23794d7-35cc-4550-a03f-8e3cde1a2bcd"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/f8557247-91fa-4772-ae14-958d709d9815"
+                  }
+                },
+                "label": "f8557247-91fa-4772-ae14-958d709d9815",
+                "id": "f8557247-91fa-4772-ae14-958d709d9815"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/fb504e55-1859-48ee-aec7-a3fcb082785e"
+                  }
+                },
+                "label": "fb504e55-1859-48ee-aec7-a3fcb082785e",
+                "id": "fb504e55-1859-48ee-aec7-a3fcb082785e"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/fb54458d-c373-46c2-841e-82663e13efaa"
+                  }
+                },
+                "label": "fb54458d-c373-46c2-841e-82663e13efaa",
+                "id": "fb54458d-c373-46c2-841e-82663e13efaa"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/fdcdf592-66f1-4027-962f-a64d49be474f"
+                  }
+                },
+                "label": "fdcdf592-66f1-4027-962f-a64d49be474f",
+                "id": "fdcdf592-66f1-4027-962f-a64d49be474f"
+              },
+              {
+                "_links": {
+                  "self": {
+                    "href": "https://cgc-staging-datasets-api.sbgenomics.com/datasets/tcga_grch38/v0/cases/ff03311b-d20d-49ee-8de4-d4487c3f2633"
+                  }
+                },
+                "label": "ff03311b-d20d-49ee-8de4-d4487c3f2633",
+                "id": "ff03311b-d20d-49ee-8de4-d4487c3f2633"
+              }
+            ]
+          },
+          "count": 97
+        },
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object"
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "_embedded",
+          "count"
+        ]
+      },
+      "DslQueryTotalResponse": {
+        "example": {
+          "total": 97
+        },
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "total"
+        ]
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {
+      "sevenbridges": {
+        "description": "Seven Bridges API token",
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-SBG-Auth-Token"
+      }
+    },
+    "links": {},
+    "callbacks": {}
+  }
+}
