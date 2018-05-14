@@ -3,7 +3,7 @@
   "info": {
     "title": "CGC Seven Bridges Datasets API",
     "description": "The Datasets API is an HTTP API for programmatically browsing and querying datasets based on metadata attributes. Metadata consists of properties, which describe each dataset’s entities, and their values.",
-    "version": "v0",
+    "version": "0",
     "termsOfService": "http://www.cancergenomicscloud.org/terms",
     "contact": {
       "x-role": "responsible organization",
