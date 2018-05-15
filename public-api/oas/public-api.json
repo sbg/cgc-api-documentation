@@ -1,0 +1,5246 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Seven Bridges Public API",
+    "description": "The CGC API uses the REST architectural style to read and write information about projects on the CGC. The API can be used to integrate the CGC with other applications, and to automate most procedures on it, such as uploading files, querying metadata, and executing analyses.",
+    "version": "2",
+    "termsOfService": "http://www.cancergenomicscloud.org/terms",
+    "contact": {
+      "x-role": "responsible organization",
+      "name": "Seven Bridges",
+      "email": "cgc@sbgenomics.com"
+    },
+    "license": {
+        "name": "Copyright 2018 Seven Bridges Genomics Inc.  Approved for use with the Cancer Genomics Cloud.",
+        "url" : "http://www.cancergenomicscloud.org/terms"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://cgc-api.sbgenomics.com/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "NIHdatacommons"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "description": "get all API paths",
+        "operationId": "GET_root",
+        "summary": "get all API paths",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/user": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get information on the current user",
+        "operationId": "GET_user",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get information on the current user",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/users": {},
+    "/users/{username}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get information on the specified user",
+        "operationId": "GET_users-username",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get information on the specified user"
+      },
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/billing": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingPaths"
+                }
+              }
+            }
+          }
+        },
+        "description": "List paths to billing information",
+        "operationId": "GET_billing",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "List paths to billing information",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/billing/groups": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BillingGroup"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List billing groups",
+        "operationId": "GET_billing-groups",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List billing groups"
+      }
+    },
+    "/billing/groups/{billing_group}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingGroup"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve a single billing group",
+        "operationId": "GET_billing-groups-billing_group",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Retrieve a single billing group"
+      },
+      "parameters": [
+        {
+          "name": "billing_group",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/billing/groups/{billing_group}/breakdown": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingGroupBreakdown"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get billing group breakdown per project",
+        "operationId": "GET_billing-groups-billing_group-breakdown",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get billing group breakdown per project"
+      },
+      "parameters": [
+        {
+          "name": "billing_group",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/billing/invoices": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Invoice"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List information on invoices",
+        "operationId": "GET_billing-invoices",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List information on invoices"
+      }
+    },
+    "/billing/invoices/{invoice_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a single invoice",
+        "operationId": "GET_billing-invoices-invoice_id",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get a single invoice"
+      },
+      "parameters": [
+        {
+          "name": "invoice_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List all projects you are a member of",
+        "operationId": "GET_projects",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "List all projects you are a member of",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a new project",
+        "operationId": "POST_projects",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestProjectCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Create a new project",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/projects/{owner}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List projects owned by and accessible to a specific owner",
+        "operationId": "GET_projects-owner",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List projects owned by and accessible to a specific owner"
+      },
+      "parameters": [
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the specified project",
+        "operationId": "GET_projects-owner-project",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get the specified project"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Edit the name, description or billing group of the project",
+        "operationId": "PATCH_projects-owner-project",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestProjectCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Edit the name, description or billing group of the project"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Delete the specified project",
+        "operationId": "DELETE_projects-owner-project",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Delete the specified project"
+      },
+      "parameters": [
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/files": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List files in the specified project. Alias for GET /files and redirects to that path.",
+        "operationId": "GET_projects-owner-project-files",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List files in the specified project. Alias for GET /files and redirects to that path."
+      },
+      "parameters": [
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/tasks": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SimpleTask"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List tasks in the speficied project. Alias for GET /tasks and redirects to that path.",
+        "operationId": "GET_projects-owner-project-tasks",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List tasks in the speficied project. Alias for GET /tasks and redirects to that path."
+      },
+      "parameters": [
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/apps": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List apps in the speficied project. Alias for GET /apps and redirects to that path.",
+        "operationId": "GET_projects-owner-project-apps",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List apps in the speficied project. Alias for GET /apps and redirects to that path."
+      },
+      "parameters": [
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/members": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectMember"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List members of the specified project",
+        "operationId": "GET_projects-owner-project-members",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List members of the specified project"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectMember"
+                }
+              }
+            }
+          }
+        },
+        "description": "Add a member to tbe project",
+        "operationId": "POST_projects-owner-project-members",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAddProjectMember"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Add a member to tbe project"
+      },
+      "parameters": [
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/members/{username}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectMember"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a project member's permissions",
+        "operationId": "GET_projects-owner-project-members-username",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get a project member's permissions"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Remove member from project",
+        "operationId": "DELETE_projects-owner-project-members-username",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Remove member from project"
+      },
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/projects/{owner}/{project}/members/{username}/permissions": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectPermission"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Overwrite all permissions for a project member",
+        "operationId": "PUT_projects-owner-project-members-username-permissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProjectPermission"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Overwrite all permissions for a project member"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectPermission"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Modify permissions for a project member",
+        "operationId": "PATCH_projects-owner-project-members-username-permissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProjectPermission"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Modify permissions for a project member"
+      },
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "project",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "owner",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/files": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/File"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List files in a specified project",
+        "operationId": "GET_files",
+        "parameters": [
+          {
+            "name": "project_owner.{project}",
+            "in": "query",
+            "required": true,
+            "description": "Project to list files from\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "description": "List file(s) with this exact complete name – can be repeated, which implies the OR operation\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metadata.{field}",
+            "in": "query",
+            "required": true,
+            "description": "List file(s) with this value in metadata field – can be repeated, which implies the OR operation\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "origin.task",
+            "in": "query",
+            "required": true,
+            "description": "List file(s) with this value as task that produced the file\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": true,
+            "description": "List file(s) with this value in *tags* property – can be repeated, which implies the OR operation\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "List files in a specified project",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/files/{file_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get file details",
+        "operationId": "GET_files-file_id",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get file details"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Delete a file",
+        "operationId": "DELETE_files-file_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Delete a file"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "description": "Update file details",
+        "operationId": "PATCH_files-file_id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFileEdit"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Update file details"
+      },
+      "parameters": [
+        {
+          "name": "file_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/files/{file_id}/actions/copy": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "description": "Copy the specified file to a project",
+        "operationId": "POST_files-file_id-actions-copy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileCopyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Copy the specified file to a project"
+      },
+      "parameters": [
+        {
+          "name": "file_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/files/{file_id}/download_info": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileDownloadUrl"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get file download info",
+        "operationId": "GET_files-file_id-download_info",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get file download info"
+      },
+      "parameters": [
+        {
+          "name": "file_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/files/{file_id}/metadata": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the metadata for the specified file",
+        "operationId": "GET_files-file_id-metadata",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get the metadata for the specified file"
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "description": "Overwrite metadata for the specified file",
+        "operationId": "PUT_files-file_id-metadata",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Overwrite metadata for the specified file"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "description": "Modify metadata for the specified file",
+        "operationId": "PATCH_files-file_id-metadata",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Modify metadata for the specified file"
+      },
+      "parameters": [
+        {
+          "name": "file_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/files/{file_id}/tags": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Add tags to a file",
+        "operationId": "PUT_files-file_id-tags",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Add tags to a file"
+      },
+      "parameters": [
+        {
+          "name": "file_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/upload": {},
+    "/upload/multipart": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Upload"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List ongoing multipart uploads",
+        "operationId": "GET_upload-multipart",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List ongoing multipart uploads"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Upload"
+                }
+              }
+            }
+          }
+        },
+        "description": "Initialize multipart upload",
+        "operationId": "POST_upload-multipart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InitUploadRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": true,
+            "description": "If true, then delete the existing file and create a new one in its place.\n",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Initialize multipart upload"
+      }
+    },
+    "/upload/multipart/{upload_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadPart"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of an active multipart upload",
+        "operationId": "GET_upload-multipart-upload_id",
+        "parameters": [
+          {
+            "name": "list_parts",
+            "in": "query",
+            "required": true,
+            "description": "if *true*, also return a list of parts that have been reported as completed for this multipart upload.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details of an active multipart upload"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "description": "Report multiple uploaded parts",
+        "operationId": "POST_upload-multipart-upload_id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "parts": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UploadPart"
+                    }
+                  }
+                },
+                "required": [
+                  "parts"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Report multiple uploaded parts"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Abort an ongoing multipart upload",
+        "operationId": "DELETE_upload-multipart-upload_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Abort an ongoing multipart upload"
+      },
+      "parameters": [
+        {
+          "name": "upload_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/upload/multipart/{upload_id}/complete": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          }
+        },
+        "description": "Report completion of a multipart file upload",
+        "operationId": "POST_upload-multipart-upload_id-complete",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Report completion of a multipart file upload"
+      },
+      "parameters": [
+        {
+          "name": "upload_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/upload/multipart/{upload_id}/part": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "description": "Report an uploaded part",
+        "operationId": "POST_upload-multipart-upload_id-part",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadPartReport"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Report an uploaded part"
+      },
+      "parameters": [
+        {
+          "name": "upload_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/upload/multipart/{upload_id}/part/{part_number}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadPartUrl"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get upload URL for a part",
+        "operationId": "GET_upload-multipart-upload_id-part-part_number",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get upload URL for a part"
+      },
+      "parameters": [
+        {
+          "name": "part_number",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "upload_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/apps": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List apps available to current user",
+        "operationId": "GET_apps",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "project_owner.{project_short_name}",
+            "in": "query",
+            "required": true,
+            "description": "Restrict results to apps from this project only\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "visibility",
+            "in": "query",
+            "required": true,
+            "description": "Set to public to see all public apps\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "List apps available to current user",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/apps/{app_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details for an app that the user can access. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned.",
+        "operationId": "GET_apps-app_id",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details for an app that the user can access. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned."
+      },
+      "parameters": [
+        {
+          "name": "app_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/apps/{app_id}/{app_id}/raw": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "description": "Raw CWL about the specified app revision. If revision number is 0, a new application is created. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned.",
+        "operationId": "GET_apps-app_id-app_id-raw",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Raw CWL about the specified app revision. If revision number is 0, a new application is created. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned."
+      },
+      "post": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "description": "Create a new revision for an existing application. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned.",
+        "operationId": "POST_apps-app_id-app_id-raw",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Create a new revision for an existing application. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned."
+      },
+      "parameters": [
+        {
+          "name": "app_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/apps/{app_id}/actions/copy": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        },
+        "description": "Copy the specified app to the specified project. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned.",
+        "operationId": "POST_apps-app_id-actions-copy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAppCopy"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Copy the specified app to the specified project. {app_id} has the form {project_owner}/{project}/{app_short_name}/{revision_number}. If the {revision_number} field is omitted, the latest revision of the app is returned."
+      },
+      "parameters": [
+        {
+          "name": "app_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/tasks": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SimpleTask"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List tasks available to current user",
+        "operationId": "GET_tasks",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "description": "Filter the list of tasks by their status\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parent",
+            "in": "query",
+            "required": true,
+            "description": "Return child tasks from this parent task\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": true,
+            "description": "Return tasks from this project\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "List tasks available to current user",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleTask"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a new task",
+        "operationId": "POST_tasks",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestCreateTask"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Create a new task",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/tasks/{task_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleTask"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of the specified task",
+        "operationId": "GET_tasks-task_id",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details of the specified task"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleTask"
+                }
+              }
+            }
+          }
+        },
+        "description": "Change details of the specified task",
+        "operationId": "PATCH_tasks-task_id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestModifyTask"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Change details of the specified task"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Delete the specified task",
+        "operationId": "DELETE_tasks-task_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Delete the specified task"
+      },
+      "parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/tasks/{task_id}/inputs": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the inputs provided to the task",
+        "operationId": "GET_tasks-task_id-inputs",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get the inputs provided to the task"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "description": "Modify the inputs of the specified task",
+        "operationId": "PATCH_tasks-task_id-inputs",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Modify the inputs of the specified task"
+      },
+      "parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/tasks/{task_id}/actions/abort": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleTask"
+                }
+              }
+            }
+          }
+        },
+        "description": "Abort the specified task",
+        "operationId": "POST_tasks-task_id-actions-abort",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Abort the specified task"
+      },
+      "parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/tasks/{task_id}/actions/run": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleTask"
+                }
+              }
+            }
+          }
+        },
+        "description": "Execute the specified task",
+        "operationId": "POST_tasks-task_id-actions-run",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "batch",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Execute the specified task"
+      },
+      "parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/tasks/{task_id}/execution_details": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStatistics"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get execution details of the specified task",
+        "operationId": "GET_tasks-task_id-execution_details",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get execution details of the specified task"
+      },
+      "parameters": [
+        {
+          "name": "task_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Volume"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List volumes the current user has registered",
+        "operationId": "GET_storage-volumes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "List volumes the current user has registered",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a new volume",
+        "operationId": "POST_storage-volumes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumeCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Create a new volume",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/storage/volumes/{volume_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of the specified volume",
+        "operationId": "GET_storage-volumes-volume_id",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details of the specified volume"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Volume"
+                }
+              }
+            }
+          }
+        },
+        "description": "Change details of the specified volume",
+        "operationId": "PATCH_storage-volumes-volume_id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumeModifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Change details of the specified volume"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Delete the specified volume and all associated files",
+        "operationId": "DELETE_storage-volumes-volume_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Delete the specified volume and all associated files"
+      },
+      "parameters": [
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes/{volume_id}/list": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VolumeFile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List contents of a specified volume",
+        "operationId": "GET_storage-volumes-volume_id-list",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List contents of a specified volume"
+      },
+      "parameters": [
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes/{volume_id}/{object_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolumeFile"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of a File within a volume",
+        "operationId": "GET_storage-volumes-volume_id-object_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details of a File within a volume"
+      },
+      "parameters": [
+        {
+          "name": "object_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes/{volume_id}/members": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VolumeUser"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List members of a volume",
+        "operationId": "GET_storage-volumes-volume_id-members",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "List members of a volume"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolumeMemberAddedResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Add a member to a volume",
+        "operationId": "POST_storage-volumes-volume_id-members",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumeAddMemberRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Add a member to a volume"
+      },
+      "parameters": [
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes/{volume_id}/members/{username}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolumeUser"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a volume member's permissions",
+        "operationId": "GET_storage-volumes-volume_id-members-username",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get a volume member's permissions"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "description": "Remove member from a volume",
+        "operationId": "DELETE_storage-volumes-volume_id-members-username",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Remove member from a volume"
+      },
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/volumes/{volume_id}/members/{username}/permissions": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolumePermission"
+                }
+              }
+            }
+          }
+        },
+        "description": "Overwrite a volume member's permissions",
+        "operationId": "PUT_storage-volumes-volume_id-members-username-permissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumePermission"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Overwrite a volume member's permissions"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VolumePermission"
+                }
+              }
+            }
+          }
+        },
+        "description": "Modify a volume member's permissions",
+        "operationId": "PATCH_storage-volumes-volume_id-members-username-permissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumePermissionModifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Modify a volume member's permissions"
+      },
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "volume_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/imports": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImportStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List import jobs initiated by a particular user",
+        "operationId": "GET_storage-imports",
+        "summary": "List import jobs initiated by a particular user",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportStatus"
+                }
+              }
+            }
+          }
+        },
+        "description": "Queue a job to import a file from a volume into a project",
+        "operationId": "POST_storage-imports",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "summary": "Queue a job to import a file from a volume into a project",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/storage/imports/{import_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportStatus"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of an import job",
+        "operationId": "GET_storage-imports-import_id",
+        "summary": "Get details of an import job",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "import_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/storage/exports": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExportStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "List export jobs initiated by a particular user",
+        "operationId": "GET_storage-exports",
+        "summary": "List export jobs initiated by a particular user",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportStatus"
+                }
+              }
+            }
+          }
+        },
+        "description": "Queue a job to export a file into a volume",
+        "operationId": "POST_storage-exports",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "summary": "Queue a job to export a file into a volume",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/storage/exports/{export_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportStatus"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get details of an export job",
+        "operationId": "GET_storage-exports-export_id",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ],
+        "summary": "Get details of an export job"
+      },
+      "parameters": [
+        {
+          "name": "export_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/action/files/copy": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileCopyStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Copy files between projects. Unlike the call files/actions/copy, this lets you batch the copy operation and copy a list of files at a time.",
+        "operationId": "GET_action-files-copy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestBatchFileCopy"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_pageable_limit"
+          },
+          {
+            "$ref": "#/components/parameters/trait_pageable_offset"
+          }
+        ],
+        "summary": "Copy files between projects. Unlike the call files/actions/copy, this lets you batch the copy operation and copy a list of files at a time.",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    },
+    "/rate_limit": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimit"
+                }
+              }
+            }
+          }
+        },
+        "description": "Information about the user's current rate limit",
+        "operationId": "GET_rate_limit",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "required": true,
+            "description": "Specify fields to be included in the response\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Information about the user's current rate limit",
+        "security": [
+          {
+            "sevenbridges": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "affiliation": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "href",
+          "username",
+          "email",
+          "first_name",
+          "last_name",
+          "country",
+          "zip_code"
+        ]
+      },
+      "RateLimit": {
+        "type": "object",
+        "properties": {
+          "rate": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer"
+              },
+              "remaining": {
+                "type": "integer"
+              },
+              "reset": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "limit",
+              "remaining",
+              "reset"
+            ]
+          }
+        },
+        "required": [
+          "rate"
+        ]
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "locked": {
+                "type": "boolean"
+              },
+              "controlled": {
+                "type": "boolean"
+              },
+              "use_interruptible_instances": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "locked",
+              "controlled",
+              "use_interruptible_instances"
+            ]
+          },
+          "billing_group": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "name",
+          "description",
+          "type",
+          "tags",
+          "settings",
+          "billing_group"
+        ]
+      },
+      "RequestProjectCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "billing_group": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "locked": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "ProjectMember": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectPermission"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "username",
+          "permissions"
+        ]
+      },
+      "ProjectPermission": {
+        "type": "object",
+        "properties": {
+          "write": {
+            "type": "boolean"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "copy": {
+            "type": "boolean"
+          },
+          "execute": {
+            "type": "boolean"
+          },
+          "admin": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "write",
+          "read",
+          "copy",
+          "execute",
+          "admin"
+        ]
+      },
+      "RequestAddProjectMember": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectPermission"
+            }
+          }
+        },
+        "required": [
+          "username",
+          "permissions"
+        ]
+      },
+      "BillingPaths": {
+        "type": "object",
+        "properties": {
+          "billing_groups_url": {
+            "type": "string"
+          },
+          "invoices_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "billing_groups_url",
+          "invoices_url"
+        ]
+      },
+      "BillingCosts": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currency",
+          "amount"
+        ]
+      },
+      "BillingGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "privileges": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/BillingCosts"
+          }
+        },
+        "required": [
+          "id",
+          "href",
+          "owner",
+          "name",
+          "type",
+          "privileges",
+          "pending",
+          "disabled",
+          "balance"
+        ]
+      },
+      "TaskBreakdown": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "runner_username": {
+            "type": "string"
+          },
+          "time_started": {
+            "type": "string"
+          },
+          "time_finished": {
+            "type": "string"
+          },
+          "task_cost": {
+            "$ref": "#/components/schemas/BillingCosts"
+          }
+        },
+        "required": [
+          "href",
+          "runner_username",
+          "time_started",
+          "time_finished",
+          "task_cost"
+        ]
+      },
+      "StorageBreakdown": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "storage_cost": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "currency",
+              "amount"
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "storage_cost"
+        ]
+      },
+      "ProjectBreakdown": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "storage_spending": {
+            "$ref": "#/components/schemas/BillingCosts"
+          },
+          "analysis_spending": {
+            "$ref": "#/components/schemas/BillingCosts"
+          },
+          "task_breakdown": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskBreakdown"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "storage_spending",
+          "analysis_spending",
+          "task_breakdown"
+        ]
+      },
+      "BillingGroupBreakdown": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "project_breakdown": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectBreakdown"
+            }
+          },
+          "total_spending": {
+            "$ref": "#/components/schemas/BillingCosts"
+          }
+        },
+        "required": [
+          "href",
+          "project_breakdown",
+          "total_spending"
+        ]
+      },
+      "InvoicePeriod": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ]
+      },
+      "Invoice": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "approval_date": {
+            "type": "string"
+          },
+          "invoice_period": {
+            "$ref": "#/components/schemas/InvoicePeriod"
+          },
+          "analysis_cost": {
+            "$ref": "#/components/schemas/BillingCosts"
+          },
+          "storage_cost": {
+            "$ref": "#/components/schemas/BillingCosts"
+          },
+          "total": {
+            "$ref": "#/components/schemas/BillingCosts"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "pending",
+          "approval_date",
+          "invoice_period",
+          "analysis_cost",
+          "storage_cost",
+          "total"
+        ]
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "project": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "FILE",
+              "FOLDER"
+            ],
+            "type": "string"
+          },
+          "created_on": {
+            "type": "string"
+          },
+          "modified_on": {
+            "type": "string"
+          },
+          "storage": {
+            "$ref": "#/components/schemas/FileStorage"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/FileOrigin"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "name",
+          "size",
+          "project",
+          "parent",
+          "type",
+          "created_on",
+          "modified_on",
+          "storage",
+          "origin",
+          "tags",
+          "metadata"
+        ]
+      },
+      "FileStorage": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "volume",
+          "location"
+        ]
+      },
+      "FileOrigin": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string"
+          },
+          "dataset": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestEditFile": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "metadata"
+        ]
+      },
+      "RequestFileEdit": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "metadata",
+          "tags"
+        ]
+      },
+      "RequestBatchFileCopy": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project",
+          "name",
+          "parent"
+        ]
+      },
+      "FileCopyRequest": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "file_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "project",
+          "file_ids"
+        ]
+      },
+      "FileCopyStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "new_file_id": {
+            "type": "string"
+          },
+          "new_file_name": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          }
+        },
+        "required": [
+          "status",
+          "new_file_id",
+          "new_file_name",
+          "error"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          },
+          "more_info": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "code",
+          "message",
+          "more_info"
+        ]
+      },
+      "FileDownloadUrl": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "App": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "raw": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "project",
+          "name",
+          "revision",
+          "raw"
+        ]
+      },
+      "RequestAppCopy": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project",
+          "name"
+        ]
+      },
+      "UploadPart": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "integer"
+          },
+          "responses": {
+            "$ref": "#/components/schemas/UploadPartReport"
+          }
+        },
+        "required": [
+          "part_number",
+          "responses"
+        ]
+      },
+      "UploadPartReport": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "object"
+          },
+          "body": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "headers",
+          "body"
+        ]
+      },
+      "Upload": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "upload_id": {
+            "type": "string"
+          },
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "initiated": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "part_size": {
+            "type": "integer"
+          },
+          "parallel_uploads": {
+            "type": "boolean"
+          },
+          "uploaded_parts_count": {
+            "type": "integer"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadPart"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "upload_id",
+          "project",
+          "name",
+          "initiated",
+          "size",
+          "part_size",
+          "parallel_uploads",
+          "uploaded_parts_count",
+          "parts"
+        ]
+      },
+      "InitUploadRequest": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "part_size": {
+            "type": "integer"
+          },
+          "md5": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project",
+          "name",
+          "size",
+          "part_size"
+        ]
+      },
+      "UploadPartUrl": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "expires": {
+            "type": "string"
+          },
+          "headers": {
+            "type": "object"
+          },
+          "successCodes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "report": {
+            "$ref": "#/components/schemas/Report"
+          }
+        },
+        "required": [
+          "method",
+          "url",
+          "expires",
+          "headers",
+          "successCodes",
+          "report"
+        ]
+      },
+      "Report": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "body": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "headers",
+          "body"
+        ]
+      },
+      "TaskBatchBy": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "criteria"
+        ]
+      },
+      "TaskBatchGroup": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "value",
+          "fields"
+        ]
+      },
+      "TaskExecutionStatus": {
+        "type": "object",
+        "properties": {
+          "steps_completed": {
+            "type": "number"
+          },
+          "steps_total": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "steps_completed",
+          "steps_total",
+          "message"
+        ]
+      },
+      "SimpleTask": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "batch"
+        },
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "COMPLETED FAILED RUNNING QUEUED DRAFT ABORTING"
+            ],
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "project": {
+            "type": "string"
+          },
+          "app": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "executed_by": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "batch": {
+            "type": "boolean"
+          },
+          "batch_input": {
+            "type": "string"
+          },
+          "batch_by": {
+            "$ref": "#/components/schemas/TaskBatchBy"
+          },
+          "batch_group": {
+            "$ref": "#/components/schemas/TaskBatchGroup"
+          },
+          "execution_status": {
+            "$ref": "#/components/schemas/TaskExecutionStatus"
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "currency",
+              "amount"
+            ]
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "inputs": {
+            "type": "object"
+          },
+          "outputs": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "name",
+          "description",
+          "status",
+          "project",
+          "app",
+          "type",
+          "created_by",
+          "executed_by",
+          "start_time",
+          "end_time",
+          "batch",
+          "batch_input",
+          "batch_by",
+          "batch_group",
+          "execution_status",
+          "price",
+          "errors",
+          "warnings",
+          "inputs",
+          "outputs"
+        ]
+      },
+      "BatchTask": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SimpleTask"
+          },
+          {
+            "properties": {
+              "batch_input": {
+                "type": "string"
+              },
+              "batch_by": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "TYPE",
+                      "CRITERIA"
+                    ],
+                    "type": "string"
+                  },
+                  "criteria": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "execution_status": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "queued": {
+                    "type": "integer"
+                  },
+                  "running": {
+                    "type": "integer"
+                  },
+                  "completed": {
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "type": "integer"
+                  },
+                  "aborted": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "string"
+      },
+      "SingleTask": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SimpleTask"
+          },
+          {
+            "properties": {
+              "parent": {
+                "type": "string"
+              },
+              "execution_status": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "steps_completed": {
+                    "type": "integer"
+                  },
+                  "steps_total": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "string"
+      },
+      "RequestCreateTask": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "project": {
+            "type": "string"
+          },
+          "app": {
+            "type": "string"
+          },
+          "batch": {
+            "type": "boolean"
+          },
+          "batch_by": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "TYPE",
+                  "CRITERIA"
+                ],
+                "type": "string"
+              },
+              "criteria": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "batch_input": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "object"
+          },
+          "use_interruptible_instances": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "project",
+          "app",
+          "inputs",
+          "use_interruptible_instances"
+        ]
+      },
+      "RequestModifyTask": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "batch_input": {
+            "type": "string"
+          },
+          "batchInputSet": {
+            "type": "boolean"
+          },
+          "batch_by": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "TYPE",
+                  "CRITERIA"
+                ],
+                "type": "string"
+              },
+              "criteria": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "inputs": {
+            "type": "object"
+          },
+          "batchBySet": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "batch_input",
+          "batchInputSet",
+          "batch_by",
+          "inputs",
+          "batchBySet"
+        ]
+      },
+      "TaskStatistics": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "taskStatsJob": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskStatsJob"
+            }
+          }
+        },
+        "required": [
+          "href",
+          "start_time",
+          "end_time",
+          "status",
+          "message",
+          "taskStatsJob"
+        ]
+      },
+      "TaskStatsJob": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "command_line": {
+            "type": "string"
+          },
+          "taskStatsInstance": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "provider"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "docker": {
+            "type": "object",
+            "properties": {
+              "checksum": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "checksum"
+            ]
+          },
+          "logs": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "start_time",
+          "end_time",
+          "command_line",
+          "taskStatsInstance",
+          "status",
+          "docker",
+          "logs"
+        ]
+      },
+      "VolumeFile": {
+        "type": "object",
+        "properties": {
+          "volume": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "volume",
+          "location",
+          "type",
+          "metadata"
+        ]
+      },
+      "ImportStatus": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "overwrite": {
+            "type": "boolean"
+          },
+          "source": {
+            "$ref": "#/components/schemas/VolumeFile"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/ImportDestination"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          },
+          "result": {
+            "$ref": "#/components/schemas/File"
+          },
+          "started_on": {
+            "type": "string"
+          },
+          "finished_on": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "state",
+          "overwrite",
+          "source",
+          "destination",
+          "error",
+          "result",
+          "started_on",
+          "finished_on"
+        ]
+      },
+      "ImportDestination": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "project",
+          "name"
+        ]
+      },
+      "ImportRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/VolumeFile"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/ImportDestination"
+          },
+          "overwrite": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source",
+          "destination",
+          "overwrite"
+        ]
+      },
+      "ExportSource": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ]
+      },
+      "ExportStatus": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          },
+          "result": {
+            "$ref": "#/components/schemas/File"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ExportSource"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/VolumeFile"
+          },
+          "started_on": {
+            "type": "string"
+          },
+          "finished_on": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "overwrite": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "state",
+          "error",
+          "result",
+          "source",
+          "destination",
+          "started_on",
+          "finished_on",
+          "properties",
+          "overwrite"
+        ]
+      },
+      "ExportRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/ExportSource"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/VolumeFile"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "overwrite": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source",
+          "destination",
+          "properties",
+          "overwrite"
+        ]
+      },
+      "ServiceType": {
+        "description": "Service discriminator",
+        "enum": [
+          "s3",
+          "gcs"
+        ],
+        "type": "string"
+      },
+      "Service": {
+        "type": "object",
+        "discriminator": {
+          "propertyName": "type"
+        },
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ServiceType"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "S3Service": {
+        "example": {
+          "bucket": "1000g",
+          "type": "s3",
+          "endpoint": "s3-us-west-1.amazonaws.com",
+          "prefix": "alignment_indices/",
+          "properties": {
+            "sse_algorithm": "AES256"
+          },
+          "credentials": {
+            "access_key_id": "AKIAIOSFODNN7EXAMPLE",
+            "secret_access_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Service"
+          },
+          {
+            "properties": {
+              "bucket": {
+                "pattern": "^[a-z0-9\\.\\-]+$",
+                "minLength": 3,
+                "maxLength": 63,
+                "description": "S3 bucket name",
+                "type": "string"
+              },
+              "prefix": {
+                "default": null,
+                "minLength": 0,
+                "maxLength": 1023,
+                "description": "Prefix used with for every object access.\nPrefix will be added to location provided in import/export request. After that path will be normalized\nex: prefix = /foo/ , location = /bar/ -> path = foo/bar\n",
+                "type": "string"
+              },
+              "endpoint": {
+                "default": "s3.amazonaws.com",
+                "description": "Endpoint to be used in communication with s3. May be overriden in case that SSE-KMS is used",
+                "type": "string"
+              },
+              "credentials": {
+                "type": "object",
+                "properties": {
+                  "access_key_id": {
+                    "type": "string"
+                  },
+                  "secret_access_key": {
+                    "type": "string"
+                  }
+                }
+              },
+              "properties": {
+                "$ref": "#/components/schemas/S3ServiceProperties"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "string"
+      },
+      "GoogleService": {
+        "example": {
+          "bucket": "1000g",
+          "type": "gcs",
+          "root_url": "https://www.googleapis.com/",
+          "prefix": "alignment_indices/",
+          "credentials": {
+            "client_email": "volume@my-gc-project.iam.gserviceaccount.com",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAJ45aJR+nrh2jTKb\nM8/FSR+djS3lwQEe8YM/i5eJYdGWEX46s7dQOQw5a1LCKNccw686JqJruZtEyfu5\nAUtjKJjY5H0vgm2RiUKksZRfnI2/rxUl09gbw7iTEZP52O2D+R6BOy5KSJWYLTwJ\nQqgRjTPuAo/2wUox+G+tOJKMf7TjAgMBAAECgYAeC67FTAod4z1K19gN41vQah2u\nEowFB3g7QSzj2M2/e+zUeJc5/zzmCl1L+NzChI7QTo2ZmDVFu9lTOL17MFg76bL0\nAVzIRncTZ9XYEutkeGO/2KndyNgEhwzhjXFcmwh7R9Mi3Kdw9u3g07EHnw6oGePi\nSL02ZP7DB+OtFklhKQJBAM+ISNSAA8jjHZSxYrHhOL/EJFq0esXwYKiVXN9sEJOc\nKhExi+y87u9X9rAAY9zhbCEHTISppY87Mwl8lnCCr90CQQDDLSUwRK2kC/31tN3h\nFjRb18OXb0rZLB48HwS4KWQJtEUrrFp5zZugR2vyorHNuv/YFwJuF2oBZsdKwJfU\nMAu/AkEAs6JcoAs6u2zTEvzD2AKB04OckCK+Toz1rZazr/RjGNHIm99OJZmYG/YA\n4nFD/1Hj/WbK9d2+H493atO7iCGmxQJBAI11C+4G6L7r/h12ABYiLMKgB9+axunN\n4v/6D0aWoS2zXSrBGTYMgg3RlfheWHXeYY2xZ455I9huMGUKX0BnrisCQQDJG3id\nAG7Qm8TM6KVUjQ6Q4Krj+GLbfdk2tcJQstC4tMCdabiS2FAXecpe7po4c0iBjfSn\nEjZHU4QMma1+X5mO\n-----END PRIVATE KEY-----\n"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Service"
+          },
+          {
+            "properties": {
+              "bucket": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "prefix": {
+                "default": null,
+                "minLength": 0,
+                "maxLength": 1023,
+                "description": "Prefix used with for every object access.\nPrefix will be added to location provided in import/export request. After that path will be normalized\nex: prefix = /foo/ , location = /bar/ -> path = foo/bar\n",
+                "type": "string"
+              },
+              "root_url": {
+                "default": "https://www.googleapis.com/",
+                "description": "Enpoint to be used in communication with gcs.",
+                "type": "string"
+              },
+              "credentials": {
+                "description": "Google service account creadentials.",
+                "type": "object",
+                "properties": {
+                  "client_email": {
+                    "type": "string"
+                  },
+                  "private_key": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "string"
+      },
+      "ServiceProperties": {
+        "type": "object"
+      },
+      "S3ServiceProperties": {
+        "description": "Default options used during export. This way user turn on sse or some canned acl\n",
+        "example": {
+          "aws_canned_acl": "public-read",
+          "sse_algorithm": "AES256"
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServiceProperties"
+          },
+          {
+            "properties": {
+              "aws_canned_acl": {
+                "description": "Set canned acl to object created during export",
+                "enum": [
+                  "private",
+                  "public-read",
+                  "public-read-write",
+                  "authenticated-read",
+                  "log-delivery-write",
+                  "bucket-owner-read",
+                  "bucket-owner-full-control",
+                  "aws-exec-read"
+                ],
+                "type": "string"
+              },
+              "aws_storage_class": {
+                "default": "STANDARD",
+                "description": "Set storage class at export. Currently hidden and GLACIER forbidden.",
+                "enum": [
+                  "STANDARD",
+                  "REDUCED_REDUNDANCY",
+                  "STANDARD_IA",
+                  "GLACIER"
+                ],
+                "type": "string"
+              },
+              "sse_algorithm": {
+                "description": "Encrypt exported file object.\nTwo types of server side encryption available:\n * AES256\n * aws:kms\nIf sse-kms is used user can specify kms id of key that will be used for encryption\nhttps://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\n",
+                "enum": [
+                  "AES256",
+                  "aws:kms"
+                ],
+                "type": "string"
+              },
+              "sse_aws_kms_key_id": {
+                "description": "Key to be used for sse encryption.\nIf key id is ommited and aws:kms is chosed, default kms key will be used.\n",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "type": "string"
+      },
+      "AccessMode": {
+        "description": "Volume access mode (read or read/write)",
+        "enum": [
+          "RO",
+          "RW"
+        ],
+        "type": "string"
+      },
+      "Volume": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "example": "storage/volumes/{volume_id}",
+            "type": "string"
+          },
+          "id": {
+            "description": "Volume id platform unique {owner}/{name}",
+            "type": "string"
+          },
+          "name": {
+            "pattern": "^[0-9a-z_]+$",
+            "minLength": 3,
+            "maxLength": 32,
+            "description": "Volume name unique for user.",
+            "type": "string"
+          },
+          "description": {
+            "minLength": 0,
+            "maxLength": 256,
+            "description": "Optional volume description",
+            "type": "string"
+          },
+          "access_mode": {
+            "description": "Volume access mode. Read-only or read-write",
+            "$ref": "#/components/schemas/AccessMode"
+          },
+          "service": {
+            "$ref": "#/components/schemas/Service"
+          },
+          "created_on": {
+            "description": "Volume creation time in ISO 8601 combined date and time representation in Coordinated Universal Time (UTC)",
+            "type": "string"
+          },
+          "modified_on": {
+            "description": "Last volume update time in ISO 8601 combined date and time representation in Coordinated Universal Time (UTC)",
+            "type": "string"
+          },
+          "active": {
+            "default": true,
+            "description": "Flag that shows is volume active.\nVolume can be inactive for some time after detaching/reataching.\n",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "href",
+          "id",
+          "name",
+          "access_mode",
+          "service",
+          "created_on",
+          "modified_on",
+          "active"
+        ]
+      },
+      "VolumeCredentials": {
+        "type": "object",
+        "properties": {
+          "client_email": {
+            "type": "string"
+          },
+          "private_key": {
+            "type": "string"
+          },
+          "access_key_id": {
+            "type": "string"
+          },
+          "secret_access_key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "client_email",
+          "private_key",
+          "access_key_id",
+          "secret_access_key"
+        ]
+      },
+      "VolumeService": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": "string"
+          },
+          "root_url": {
+            "type": "string"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/VolumeCredentials"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "bucket",
+          "prefix",
+          "endpoint",
+          "root_url",
+          "credentials",
+          "properties"
+        ]
+      },
+      "VolumeCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "service": {
+            "$ref": "#/components/schemas/VolumeService"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "service"
+        ]
+      },
+      "VolumeServiceModifyRequest": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": "string"
+          },
+          "root_url": {
+            "type": "string"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/VolumeCredentials"
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "access_mode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bucket",
+          "prefix",
+          "endpoint",
+          "root_url",
+          "credentials",
+          "properties",
+          "access_mode"
+        ]
+      },
+      "VolumeModifyRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "service": {
+            "$ref": "#/components/schemas/VolumeServiceModifyRequest"
+          }
+        },
+        "required": [
+          "description",
+          "service"
+        ]
+      },
+      "VolumeUser": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/VolumePermission"
+          },
+          "joined_on": {
+            "type": "number"
+          },
+          "level": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "href",
+          "username",
+          "email",
+          "permissions",
+          "joined_on",
+          "level"
+        ]
+      },
+      "VolumePermission": {
+        "type": "object",
+        "properties": {
+          "write": {
+            "type": "boolean"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "copy": {
+            "type": "boolean"
+          },
+          "admin": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "write",
+          "read",
+          "copy",
+          "admin"
+        ]
+      },
+      "VolumePermissionModifyRequest": {
+        "type": "object",
+        "properties": {
+          "write": {
+            "type": "boolean"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "copy": {
+            "type": "boolean"
+          },
+          "admin": {
+            "type": "boolean"
+          }
+        }
+      },
+      "VolumeAddMemberRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/VolumePermission"
+          }
+        },
+        "required": [
+          "username",
+          "permissions"
+        ]
+      },
+      "VolumeMemberAddedResponse": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/VolumePermission"
+          },
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "email",
+          "href",
+          "permissions",
+          "type",
+          "id"
+        ]
+      }
+    },
+    "responses": {},
+    "parameters": {
+      "trait_pageable_limit": {
+        "name": "limit",
+        "in": "query",
+        "required": true,
+        "description": "A limit on the number of resources to be returned. Limit can range between 1 and 100 items.",
+        "schema": {
+          "default": 50,
+          "type": "integer"
+        }
+      },
+      "trait_pageable_offset": {
+        "name": "offset",
+        "in": "query",
+        "required": true,
+        "description": "Skip this many items when returning results",
+        "schema": {
+          "default": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {
+      "sevenbridges": {
+        "description": "Seven Bridges API token",
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-SBG-Auth-Token"
+      }
+    },
+    "links": {},
+    "callbacks": {}
+  }
+}
