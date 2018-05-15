@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Seven Bridges Public API",
+    "title": "CGC Seven Bridges Public API",
     "description": "The CGC API uses the REST architectural style to read and write information about projects on the CGC. The API can be used to integrate the CGC with other applications, and to automate most procedures on it, such as uploading files, querying metadata, and executing analyses.",
     "version": "2",
     "termsOfService": "http://www.cancergenomicscloud.org/terms",
@@ -35,12 +35,7 @@
         },
         "description": "get all API paths",
         "operationId": "GET_root",
-        "summary": "get all API paths",
-        "security": [
-          {
-            "sevenbridges": []
-          }
-        ]
+        "summary": "get all API paths"
       }
     },
     "/user": {
